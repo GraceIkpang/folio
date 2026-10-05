@@ -413,7 +413,7 @@ export const upcomingCaseStudies: UpcomingCaseStudy[] = [
   {
     slug: "ashgridx-workspace",
     name: "AshGridX Workspace",
-    summary: "A nonprofit’s mission brought to life.",
+    summary: "The console behind SureChargeX, AshAudit, and AshGridX.",
     platform: "Web",
   },
 ];

@@ -98,7 +98,7 @@ export const liveProducts: LiveProduct[] = [
   { name: "AshAudit", summary: "GPS-accurate site audits, online or offline.", platform: "Web & Mobile", caseStudy: "/work/ashaudit" },
   { name: "AshGridX", summary: "Track electricity usage and recharge instantly.", platform: "Web & Mobile", caseStudy: "/work/ashgridx" },
   { name: "Urban Women", summary: "A nonprofit’s mission brought to life.", platform: "Web", caseStudy: "/work/urban-women" },
-  { name: "AshGridX Workspace", summary: "A nonprofit’s mission brought to life.", platform: "Web", caseStudy: "/work/ashgridx-workspace" },
+  { name: "AshGridX Workspace", summary: "The console behind SureChargeX, AshAudit, and AshGridX.", platform: "Web", caseStudy: "/work/ashgridx-workspace" },
 ];
 
 export type Screen = {
