@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# design working files (Figma exports, CSS, references) — kept locally only
+/design/
+
+# local Claude Code settings
+/.claude/

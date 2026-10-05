@@ -1,26 +1,67 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+ * Design tokens — every colour, font and text size on the site comes from
+ * here. Values are taken from the Figma frame "full design page 1".
+ */
+@theme {
+  /* Colours */
+  --color-canvas: #fafaf7;
+  --color-surface: #ffffff;
+  --color-line: #e8e6e1;
+  --color-ink: #15151b;
+  --color-muted: #6c6c74;
+  --color-accent: #ff3d82;
+  --color-accent-soft: #ffe3ee;
+  --color-film: #171618;
+  --color-film-caption: #b9b7be;
+
+  /* Fonts (loaded in app/layout.tsx) */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-hand: var(--font-caveat), cursive;
+  --font-system: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+
+  /* Type scale: size / line-height */
+  --text-display: 46px;
+  --text-display--line-height: 54px;
+  --text-closing: 32px;
+  --text-closing--line-height: 50px;
+  --text-brand: 22px;
+  --text-brand--line-height: 34px;
+  --text-section: 20px;
+  --text-section--line-height: 31px;
+  --text-card-title: 17px;
+  --text-card-title--line-height: 26px;
+  --text-lead: 16px;
+  --text-lead--line-height: 25px;
+  --text-role: 15.5px;
+  --text-role--line-height: 24px;
+  --text-ui: 14px;
+  --text-ui--line-height: 22px;
+  --text-body: 13.5px;
+  --text-body--line-height: 21px;
+  --text-meta: 13px;
+  --text-meta--line-height: 20px;
+  --text-hint: 12px;
+  --text-hint--line-height: 19px;
+  --text-tag: 11.5px;
+  --text-tag--line-height: 18px;
+  --text-caption: 11px;
+  --text-caption--line-height: 17px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html {
+  background: var(--color-canvas);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-canvas);
+  color: var(--color-ink);
 }
