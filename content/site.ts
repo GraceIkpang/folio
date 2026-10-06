@@ -166,7 +166,14 @@ export const shots: Shot[] = [
     summary:
       "A quick-search command palette for jumping between documents, people, and actions.",
     tags: ["Interaction design", "Web"],
-    screens: [],
+    screens: [
+      {
+        src: "/images/explorations/command-palette/01.png",
+        width: 1644,
+        height: 1169,
+        alt: "A command palette open over a pink landscape wallpaper, searching “Q3 roadmap”, with results grouped into documents, people and projects, messages, and actions.",
+      },
+    ],
   },
   {
     slug: "private-banking",
@@ -174,7 +181,14 @@ export const shots: Shot[] = [
     image: "/images/shots/private-banking.png",
     summary: "A calm, at-a-glance home screen for a private banking app.",
     tags: ["UI design", "Mobile"],
-    screens: [],
+    screens: [
+      {
+        src: "/images/explorations/private-banking/01.png",
+        width: 1644,
+        height: 1169,
+        alt: "The Mono banking app home screen: a ₦167,940 total balance, quick actions to send and add money, and a list of recent transactions.",
+      },
+    ],
   },
   {
     slug: "booking-details",
@@ -182,7 +196,14 @@ export const shots: Shot[] = [
     image: "/images/shots/booking-details.png",
     summary: "A booking page for a villa stay that lets the photography lead.",
     tags: ["UI design", "Web"],
-    screens: [],
+    screens: [
+      {
+        src: "/images/explorations/booking-details/01.png",
+        width: 1644,
+        height: 2770,
+        alt: "A booking page for Casa Oliva, a villa among the vineyards: a hero photo, villa details, a photo gallery, what the villa offers, and a reservation panel totalling $3,140.",
+      },
+    ],
   },
   {
     slug: "dashboard-ui",
@@ -190,7 +211,14 @@ export const shots: Shot[] = [
     image: "/images/shots/dashboard-ui.png",
     summary: "An analytics dashboard for tracking revenue, users, and top pages.",
     tags: ["Dashboard", "Web"],
-    screens: [],
+    screens: [
+      {
+        src: "/images/explorations/dashboard-ui/01.png",
+        width: 1644,
+        height: 1169,
+        alt: "The Pulse analytics dashboard: revenue, active users, conversion and churn figures, a monthly revenue bar chart, top pages, and recent events.",
+      },
+    ],
   },
 ];
 
