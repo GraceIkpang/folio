@@ -87,7 +87,7 @@ export type LiveProduct = {
 };
 
 export const workPage = {
-  headline: "Six products, live, in the hands of real users.",
+  headline: "Seven products, live, in the hands of real users.",
   intro:
     "A selection of websites and apps I’ve designed to make everyday tasks easier. Different challenges, with the same care for clarity, usability, and the details.",
 };
