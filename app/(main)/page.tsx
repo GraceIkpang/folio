@@ -14,7 +14,7 @@ export default function Home() {
       <Section
         id="work"
         title="Selected work"
-        aside="Show 6 live products"
+        aside="Show all live products"
         asideHref="/work"
       >
         <WorkCarousel items={selectedWork} />
