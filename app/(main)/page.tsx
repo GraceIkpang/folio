@@ -13,7 +13,7 @@ export default function Home() {
 
       <Section
         id="work"
-        title="Works"
+        title="Work"
         aside="Show all live products"
         asideHref="/work"
       >

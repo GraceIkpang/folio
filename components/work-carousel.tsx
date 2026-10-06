@@ -61,7 +61,7 @@ export function WorkCarousel({ items }: { items: SelectedWork[] }) {
       {/* A hairline of padding (8px) gives the hover growth room without visibly breaking the margin. */}
       <ul
         ref={trackRef}
-        aria-label="Works"
+        aria-label="Work"
         className="-mx-2 -my-3 flex snap-x snap-mandatory scroll-px-2 gap-4 overflow-x-auto px-2 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {items.map((item) => (
