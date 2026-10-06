@@ -22,6 +22,7 @@ export const socials = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/graceikpang" },
   { label: "X", href: "https://x.com/grayycee_" },
   { label: "Dribbble", href: "https://dribbble.com/Grace_Ikpang" },
+  { label: "GitHub", href: "https://github.com/GraceIkpang" },
 ];
 
 export const navigation = [
