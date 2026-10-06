@@ -25,7 +25,7 @@ export async function generateMetadata(
   const { slug } = await props.params;
   const study = getCaseStudy(slug) ?? getUpcomingCaseStudy(slug);
   return study
-    ? { title: `${study.name} — Grace Ikpang`, description: study.summary }
+    ? { title: `${study.name} · Grace Ikpang`, description: study.summary }
     : {};
 }
 

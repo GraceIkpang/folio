@@ -37,7 +37,7 @@ export default function Home() {
         <SnapshotStrip snapshots={snapshots} />
       </Section>
 
-      <Section id="experience" title="Experience" aside="2023 — now">
+      <Section id="experience" title="Experience" aside="2023 to now">
         <ExperienceList roles={experience} />
       </Section>
     </main>

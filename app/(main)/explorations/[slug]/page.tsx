@@ -20,7 +20,7 @@ export async function generateMetadata(
   const { slug } = await props.params;
   const shot = shots.find((s) => s.slug === slug);
   return shot
-    ? { title: `${shot.name} — Grace Ikpang`, description: shot.summary }
+    ? { title: `${shot.name} · Grace Ikpang`, description: shot.summary }
     : {};
 }
 

@@ -23,7 +23,7 @@ const caveat = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Grace Ikpang — Product Designer",
+  title: "Grace Ikpang · Product Designer",
   description:
     "Product designer working across product design, design systems, and interaction design.",
 };

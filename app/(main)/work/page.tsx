@@ -4,7 +4,7 @@ import { ProductRow } from "@/components/product-row";
 import { liveProducts, workPage } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Work — Grace Ikpang",
+  title: "Work · Grace Ikpang",
   description: workPage.intro,
 };
 

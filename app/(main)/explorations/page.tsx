@@ -4,7 +4,7 @@ import { UiShotCard } from "@/components/ui-shot-card";
 import { shots } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "UI shots — Grace Ikpang",
+  title: "UI shots · Grace Ikpang",
   description: "Loose screens and interface explorations by Grace Ikpang.",
 };
 
@@ -17,7 +17,7 @@ export default function ExplorationsPage() {
         aside={`${shots.length} explorations`}
       >
         <p className="max-w-[526px] text-lead text-muted">
-          Loose screens and interface explorations — small ideas I wanted to
+          Loose screens and interface explorations: small ideas I wanted to
           try outside of client work.
         </p>
       </PageIntro>

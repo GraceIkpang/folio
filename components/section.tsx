@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 type SectionProps = {
   id: string;
   title: string;
-  /** Small grey text on the right of the title, e.g. "2023 — now". */
+  /** Small grey text on the right of the title, e.g. "2023 to now". */
   aside?: string;
   /** Turns the aside into a link. */
   asideHref?: string;
