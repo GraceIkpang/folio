@@ -231,10 +231,10 @@ export const snapshots: Snapshot[] = [
   { caption: "pink, workspace", image: "/images/snapshots/02.png" },
   { caption: "mirror, me", image: "/images/snapshots/03.png" },
   { caption: "cooking, figma", image: "/images/snapshots/04.png" },
-  { caption: "desk setup" },
-  { caption: "friends" },
-  { caption: "city lights" },
-  { caption: "plants" },
+  { caption: "guilty, pleasure", image: "/images/snapshots/05.png" },
+  { caption: "favourite, view", image: "/images/snapshots/06.png" },
+  { caption: "little, read", image: "/images/snapshots/07.png" },
+  { caption: "cute, photo", image: "/images/snapshots/08.png" },
 ];
 
 export type Role = {
