@@ -1,10 +1,10 @@
 import { ExperienceList } from "@/components/experience-list";
 import { Hero } from "@/components/hero";
-import { ProjectCard } from "@/components/project-card";
 import { Section } from "@/components/section";
 import { SnapshotStrip } from "@/components/snapshot-strip";
 import { UiShotCard } from "@/components/ui-shot-card";
-import { experience, projects, shots, snapshots } from "@/content/site";
+import { WorkCarousel } from "@/components/work-carousel";
+import { experience, selectedWork, shots, snapshots } from "@/content/site";
 
 export default function Home() {
   return (
@@ -17,11 +17,7 @@ export default function Home() {
         aside="Show 6 live products"
         asideHref="/work"
       >
-        <div className="grid gap-[18px] sm:grid-cols-2">
-          {projects.map((project) => (
-            <ProjectCard key={project.name} project={project} />
-          ))}
-        </div>
+        <WorkCarousel items={selectedWork} />
       </Section>
 
       <Section

@@ -3,6 +3,8 @@ import Link from "next/link";
 import type { Project } from "@/content/site";
 import { Tag } from "./tag";
 
+/** The original homepage card (2×2 grid). Not used since the carousel — kept so
+ *  `archive/selected-work-grid` is easy to restore. */
 export function ProjectCard({ project }: { project: Project }) {
   const { name, description, image, tags, href } = project;
 

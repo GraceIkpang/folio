@@ -65,3 +65,66 @@ body {
   background: var(--color-canvas);
   color: var(--color-ink);
 }
+
+/*
+ * Selected work carousel — hover.
+ * Purpose: feedback (which card you're about to open). A frequent action, so
+ * it stays small and quick: the frame eases up a touch, the image settles in
+ * slightly further, and a "View case study" chip fades in. Transform/opacity only.
+ */
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.showcase-frame,
+.showcase-image,
+.showcase-chip {
+  transition-duration: 240ms;
+  transition-timing-function: var(--ease-out);
+}
+
+.showcase-frame {
+  transition-property: transform, border-color;
+}
+
+.showcase-image {
+  transition-property: transform;
+}
+
+.showcase-chip {
+  opacity: 0;
+  transform: translateY(-4px);
+  transition-property: opacity, transform;
+}
+
+/* Only real pointers get hover motion — taps on touch screens fire false hovers. */
+@media (hover: hover) and (pointer: fine) {
+  .showcase-card:hover .showcase-frame {
+    transform: scale(1.02);
+    border-color: color-mix(in srgb, var(--color-muted) 35%, transparent);
+  }
+
+  .showcase-card:hover .showcase-image {
+    transform: scale(1.03);
+  }
+
+  .showcase-card:hover .showcase-chip {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Keyboard users get the same signal when a card's link is focused. */
+.showcase-card:has(:focus-visible) .showcase-chip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Reduced motion: keep the colour and chip fade, drop the growth. */
+@media (prefers-reduced-motion: reduce) {
+  .showcase-card:hover .showcase-frame,
+  .showcase-card:hover .showcase-image,
+  .showcase-chip {
+    transform: none;
+  }
+}

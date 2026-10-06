@@ -101,6 +101,42 @@ export const liveProducts: LiveProduct[] = [
   { name: "AshGridX Workspace", summary: "The console behind SureChargeX, AshAudit, and AshGridX.", platform: "Web", caseStudy: "/work/ashgridx-workspace" },
 ];
 
+/** A card in the homepage "Selected work" carousel. Images are 8:7 (828 × 724). */
+export type SelectedWork = {
+  name: string;
+  tagline: string;
+  image: string;
+  /** Link to the project's case study. */
+  href?: string;
+};
+
+export const selectedWork: SelectedWork[] = [
+  {
+    name: "SureChargeX",
+    tagline: "Find stations, book sessions, and charge.",
+    image: "/images/carousel/surechargex.png",
+    href: "/work/surechargex",
+  },
+  {
+    name: "KIPA",
+    tagline: "Escrow payments and errands, one app.",
+    image: "/images/carousel/kipa.png",
+    href: "/work/kipa",
+  },
+  {
+    name: "Algol Solutions",
+    tagline: "A digital home for tech consulting.",
+    image: "/images/carousel/algol-solutions.png",
+    href: "/work/algol-solutions",
+  },
+  {
+    name: "Urban Women",
+    tagline: "A nonprofit’s mission brought to life.",
+    image: "/images/carousel/urban-women.png",
+    href: "/work/urban-women",
+  },
+];
+
 export type Screen = {
   /** Path inside public/, e.g. "/images/explorations/dashboard-ui/01.png" */
   src: string;
