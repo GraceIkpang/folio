@@ -157,9 +157,43 @@ export type Shot = {
   tags: string[];
   /** Full designs shown on the shot's own page. Empty = "coming soon". */
   screens: Screen[];
+  /** A silent looping clip that replaces the still on the homepage/explorations card. */
+  preview?: { src: string; poster: string };
+  /** A motion walkthrough shown above the full designs on the shot's page. */
+  video?: { src: string; poster: string; width: number; height: number; label: string };
+  /** Link to where the design runs live (shows a "View it live" button). */
+  liveUrl?: string;
 };
 
 export const shots: Shot[] = [
+  {
+    slug: "booking-details",
+    name: "SOL: Booking Details",
+    image: "/images/shots/booking-details.png",
+    summary: "A booking page for a villa stay that lets the photography lead.",
+    tags: ["UI design", "Web"],
+    screens: [
+      {
+        src: "/images/explorations/booking-details/01.png",
+        width: 1644,
+        height: 2770,
+        alt: "A booking page for Casa Oliva, a villa among the vineyards: a hero photo, villa details, a photo gallery, what the villa offers, and a reservation panel totalling $3,140.",
+      },
+    ],
+    preview: {
+      src: "/videos/sol/card-loop.mp4",
+      poster: "/videos/sol/card-loop-poster.jpg",
+    },
+    video: {
+      src: "/videos/sol/booking-walkthrough.mp4",
+      poster: "/videos/sol/booking-walkthrough-poster.jpg",
+      width: 1644,
+      height: 924,
+      label:
+        "A walkthrough of the Casa Oliva booking page: scrolling past the villa photos and amenities, then picking dates and guests in the booking panel.",
+    },
+    liveUrl: "https://sol-booking-controls.vercel.app/",
+  },
   {
     slug: "command-palette",
     name: "Command Pallete",
@@ -188,21 +222,6 @@ export const shots: Shot[] = [
         width: 1644,
         height: 1169,
         alt: "The Mono banking app home screen: a ₦167,940 total balance, quick actions to send and add money, and a list of recent transactions.",
-      },
-    ],
-  },
-  {
-    slug: "booking-details",
-    name: "Booking Details",
-    image: "/images/shots/booking-details.png",
-    summary: "A booking page for a villa stay that lets the photography lead.",
-    tags: ["UI design", "Web"],
-    screens: [
-      {
-        src: "/images/explorations/booking-details/01.png",
-        width: 1644,
-        height: 2770,
-        alt: "A booking page for Casa Oliva, a villa among the vineyards: a hero photo, villa details, a photo gallery, what the villa offers, and a reservation panel totalling $3,140.",
       },
     ],
   },

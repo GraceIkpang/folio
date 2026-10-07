@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ButtonLink } from "@/components/button-link";
+import { LoopingVideo } from "@/components/looping-video";
 import { PageIntro } from "@/components/page-intro";
 import { Tag } from "@/components/tag";
 import { WindowFrame } from "@/components/window-frame";
@@ -44,9 +46,31 @@ export default async function ShotPage(props: PageProps<"/explorations/[slug]">)
             </Tag>
           ))}
         </ul>
+        {shot.liveUrl && (
+          <div className="pt-2">
+            <ButtonLink href={shot.liveUrl} target="_blank" rel="noopener noreferrer" className="px-5">
+              View it live
+              <span aria-hidden="true" className="text-hint">↗</span>
+              <span className="sr-only">(opens in a new tab)</span>
+            </ButtonLink>
+          </div>
+        )}
       </PageIntro>
 
       <div className="flex flex-col gap-[18px]">
+        {shot.video && (
+          <WindowFrame>
+            <LoopingVideo
+              src={shot.video.src}
+              poster={shot.video.poster}
+              width={shot.video.width}
+              height={shot.video.height}
+              label={shot.video.label}
+              controls
+              className="h-auto w-full rounded-md"
+            />
+          </WindowFrame>
+        )}
         {shot.screens.length > 0 ? (
           shot.screens.map((screen, i) => (
             <WindowFrame key={screen.src}>
