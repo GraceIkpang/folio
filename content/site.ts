@@ -163,6 +163,11 @@ export type Shot = {
   video?: { src: string; poster: string; width: number; height: number; label: string };
   /** Link to where the design runs live (shows a "View it live" button). */
   liveUrl?: string;
+  /** Small pink handwritten labels above the video and the full designs. */
+  labels?: {
+    video: { title: string; text: string };
+    screens: { title: string; text: string };
+  };
 };
 
 export const shots: Shot[] = [
@@ -193,6 +198,16 @@ export const shots: Shot[] = [
         "A walkthrough of the Casa Oliva booking page: scrolling past the villa photos and amenities, then picking dates and guests in the booking panel.",
     },
     liveUrl: "https://sol-booking-controls.vercel.app/",
+    labels: {
+      video: {
+        title: "In motion",
+        text: "Picking dates and guests on the live booking page.",
+      },
+      screens: {
+        title: "The full design",
+        text: "The complete page, from the villa photos to the reservation panel.",
+      },
+    },
   },
   {
     slug: "command-palette",
