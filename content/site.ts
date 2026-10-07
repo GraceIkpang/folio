@@ -176,7 +176,7 @@ export const shots: Shot[] = [
     name: "SOL: Booking Details",
     image: "/images/shots/booking-details.png",
     summary: "A booking page for a villa stay that lets the photography lead.",
-    tags: ["UI design", "Web"],
+    tags: ["UI design", "Interaction design", "Web"],
     screens: [
       {
         src: "/images/explorations/booking-details/01.png",
