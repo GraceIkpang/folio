@@ -172,6 +172,22 @@ export type Shot = {
 
 export const shots: Shot[] = [
   {
+    slug: "command-palette",
+    name: "Command Pallete",
+    image: "/images/shots/command-palette.png",
+    summary:
+      "A quick-search command palette for jumping between documents, people, and actions.",
+    tags: ["Interaction design", "Web"],
+    screens: [
+      {
+        src: "/images/explorations/command-palette/01.png",
+        width: 1644,
+        height: 1169,
+        alt: "A command palette open over a pink landscape wallpaper, searching “Q3 roadmap”, with results grouped into documents, people and projects, messages, and actions.",
+      },
+    ],
+  },
+  {
     slug: "booking-details",
     name: "SOL: Booking Details",
     image: "/images/shots/booking-details.png",
@@ -208,22 +224,6 @@ export const shots: Shot[] = [
         text: "The complete page, from the villa photos to the reservation panel.",
       },
     },
-  },
-  {
-    slug: "command-palette",
-    name: "Command Pallete",
-    image: "/images/shots/command-palette.png",
-    summary:
-      "A quick-search command palette for jumping between documents, people, and actions.",
-    tags: ["Interaction design", "Web"],
-    screens: [
-      {
-        src: "/images/explorations/command-palette/01.png",
-        width: 1644,
-        height: 1169,
-        alt: "A command palette open over a pink landscape wallpaper, searching “Q3 roadmap”, with results grouped into documents, people and projects, messages, and actions.",
-      },
-    ],
   },
   {
     slug: "private-banking",
