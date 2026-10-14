@@ -188,7 +188,7 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "image",
         image: {
-          src: "/images/case-studies/surechargex/app-screens-v3.png",
+          src: "/images/case-studies/surechargex/app-screens-v4.png",
           width: 1328,
           height: 747,
           displayWidth: 664,
