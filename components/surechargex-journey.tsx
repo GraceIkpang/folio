@@ -17,7 +17,7 @@ const PHONES = {
 
 // The battery counts from the "Start" screen's 23% up to the final 51%,
 // while the time left to full charge counts down to 00:32:54.
-const BATTERY = { from: 23, to: 51, startAt: 2600, duration: 1400 };
+const BATTERY = { from: 23, to: 51, startAt: 3250, duration: 1750 };
 const TIME_LEFT = { from: 51 * 60 + 42, to: 32 * 60 + 54 };
 
 type PhoneKey = keyof typeof PHONES;

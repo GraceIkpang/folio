@@ -1,8 +1,8 @@
 /* The SureChargeX journey: find a station, drive to it, charge.
    Everything is placed in percentages of the 1328 × 747 artwork so the
-   scene scales with the column. Timings follow the plan agreed with Grace:
-   phones rise (0–0.8s), the map finds a station (0.8–1.6s), the route
-   draws (1.6–2.6s), then the battery fills (2.6–4s, driven from JS). */
+   scene scales with the column. Timings: phones rise (0–1.2s), the map
+   finds a station (1–2s), the route draws (2–3.25s), then the battery
+   fills (3.25–5s, driven from JS). */
 
 .stage {
   position: relative;
@@ -134,27 +134,27 @@
 /* ---- Motion: only once the scene is armed (never for reduced motion) ---- */
 
 .stage:not([data-state="static"]) .rise {
-  animation: rise 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: rise 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
 .stage:not([data-state="static"]) .riseLate {
-  animation: rise 0.8s 0.15s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: rise 1s 0.19s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
 .stage:not([data-state="static"]) .pulse {
-  animation: pulse 0.55s 0.8s ease-out 2 both;
+  animation: pulse 0.7s 1s ease-out 2 both;
 }
 
 .stage:not([data-state="static"]) .sheet {
-  animation: sheet-up 0.65s 0.95s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: sheet-up 0.8s 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
 .stage:not([data-state="static"]) .route path {
-  animation: draw 0.7s 1.6s ease-in-out both;
+  animation: draw 0.9s 2s ease-in-out both;
 }
 
 .stage:not([data-state="static"]) .eta {
-  animation: drop-in 0.45s 2.15s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: drop-in 0.55s 2.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
 /* Armed: hold every animation on its first frame until the scene is seen. */
