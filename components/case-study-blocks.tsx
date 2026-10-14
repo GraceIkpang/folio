@@ -264,7 +264,14 @@ function Block({ block }: { block: CaseStudyBlock }) {
                           key={k}
                           aria-hidden="true"
                           className="absolute rounded-md border-2 border-accent bg-accent/5"
-                          style={{ left: `${h.x}%`, top: `${h.y}%`, width: `${h.w}%`, height: `${h.h}%` }}
+                          // Widened a little each side so the outline doesn't
+                          // touch the text, but never past the screen edge.
+                          style={{
+                            left: `max(3px, calc(${h.x}% - 6px))`,
+                            right: `max(3px, calc(${100 - h.x - h.w}% - 6px))`,
+                            top: `${h.y}%`,
+                            height: `${h.h}%`,
+                          }}
                         />
                       ))}
                     </div>
