@@ -10,7 +10,7 @@ const DIR = "/images/case-studies/surechargex/journey";
 // in the artwork, and where its screen sits inside the square.
 const STAGE = { w: 1328, h: 747 };
 const PHONES = {
-  left: { size: 690, cx: 292, cy: 624, tilt: -9.5, screen: [202, 38, 283, 614] },
+  left: { size: 696, cx: 291, cy: 624, tilt: -9.5, screen: [204, 40, 283, 614] },
   middle: { size: 696, cx: 664, cy: 505, tilt: 0, screen: [204, 40, 283, 614] },
   right: { size: 696, cx: 1035, cy: 624, tilt: 9.5, screen: [204, 40, 283, 614] },
 } as const;
@@ -123,7 +123,7 @@ export function SureChargeXJourney({ alt }: { alt: string }) {
 
       {/* Left: driving to the station */}
       <div aria-hidden="true" className={`${styles.phone} ${styles.riseLate}`} style={phoneStyle("left")}>
-        <Image src={`${DIR}/phone-left.png`} alt="" width={690} height={690} sizes={PHONE_SIZES} className={styles.fill} />
+        <Image src={`${DIR}/phone-left.png`} alt="" width={696} height={696} sizes={PHONE_SIZES} className={styles.fill} />
         <div className={styles.screen} style={screenStyle("left")}>
           <svg viewBox="0 0 393 852" fill="none" className={styles.route}>
             <path
