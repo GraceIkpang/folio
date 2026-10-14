@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
-import type { CaseStudyBlock } from "@/content/case-studies";
+import type { CaseStudyBlock, SectionContent } from "@/content/case-studies";
 
 type ImageData = Extract<CaseStudyBlock, { type: "image" }>["image"];
 type CaptionData = { start: string; end?: string };
@@ -56,6 +56,61 @@ export function CaseStudyFigure({
   );
 }
 
+/** A paragraph, bullet list or small table inside a section. */
+function SectionPart({ content }: { content: SectionContent }) {
+  if (typeof content === "string") return <p>{content}</p>;
+
+  if ("list" in content) {
+    return (
+      <ul className="flex list-disc flex-col gap-2 pl-5 marker:text-muted">
+        {content.list.map((item) =>
+          typeof item === "string" ? (
+            <li key={item}>{item}</li>
+          ) : (
+            <li key={item.term}>
+              <strong className="font-semibold">{item.term}</strong> {item.text}
+            </li>
+          ),
+        )}
+      </ul>
+    );
+  }
+
+  return (
+    // Scrolls sideways on small screens instead of squashing the columns.
+    <div className="-mx-1 overflow-x-auto px-1">
+      <table className="w-full min-w-[520px] border-collapse text-left text-body">
+        <thead>
+          <tr className="border-b border-line">
+            {content.table.head.map((cell) => (
+              <th key={cell} scope="col" className="py-2 pr-4 font-display text-meta font-semibold text-muted">
+                {cell}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {content.table.rows.map((row) => (
+            <tr key={row[0]} className="border-b border-line align-top">
+              {row.map((cell, i) =>
+                i === 0 ? (
+                  <th key={i} scope="row" className="py-2.5 pr-4 font-semibold whitespace-nowrap">
+                    {cell}
+                  </th>
+                ) : (
+                  <td key={i} className="py-2.5 pr-4 text-muted">
+                    {cell}
+                  </td>
+                ),
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 // Space above each block, from the Figma file.
 function spaceAbove(block: CaseStudyBlock, previous?: CaseStudyBlock) {
   switch (block.type) {
@@ -79,13 +134,16 @@ function Block({ block }: { block: CaseStudyBlock }) {
       return (
         <section>
           <SectionLabel>{block.title}</SectionLabel>
+          {block.heading && (
+            <h3 className="pt-2 font-display text-card-title font-semibold">{block.heading}</h3>
+          )}
           <div
             className={`flex flex-col ${block.compact ? "gap-4" : "gap-6"} ${
               block.muted ? "pt-3 text-role text-muted" : "pt-4 text-role text-ink"
             }`}
           >
-            {block.paragraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
+            {block.paragraphs.map((content, i) => (
+              <SectionPart key={i} content={content} />
             ))}
             {block.subsections && (
               <div className="flex flex-col gap-12">

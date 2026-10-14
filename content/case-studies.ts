@@ -20,11 +20,23 @@ type Caption = { start: string; end?: string };
 
 type Subsection = { title: string; paragraphs: string[] };
 
+/** A bullet; `term` is shown in bold before the text, e.g. "Booking completion:". */
+type ListItem = string | { term: string; text: string };
+
+/** One piece of a section's body: a paragraph, a bullet list, or a small table. */
+export type SectionContent =
+  | string
+  | { list: ListItem[] }
+  | { table: { head: string[]; rows: string[][] } };
+
 export type CaseStudyBlock = (
   | {
       type: "section";
+      /** Small pink uppercase label, e.g. "Problem" or "Decision 1". */
       title: string;
-      paragraphs: string[];
+      /** Optional heading under the label that says what the section shows. */
+      heading?: string;
+      paragraphs: SectionContent[];
       /** Smaller headed parts inside the section, after the paragraphs. */
       subsections?: Subsection[];
       /** Tighter space between paragraphs. */
@@ -90,9 +102,9 @@ export const caseStudies: CaseStudy[] = [
     year: "2026",
     category: "Product design · EV Charging",
     summary:
-      "Helping EV drivers find a charging station, book a session, and manage their charge in one app.",
+      "A mobile app and website for Ashipa Electric that let EV drivers find a station, reserve a charging slot, pay and charge in one journey, with every cost shown before they commit.",
     facts: [
-      { label: "Role", value: "Product designer" },
+      { label: "Role", value: "Sole product designer" },
       { label: "Timeline", value: "6 months" },
       { label: "Platform", value: "Mobile & Web" },
     ],
@@ -108,24 +120,29 @@ export const caseStudies: CaseStudy[] = [
     blocks: [
       {
         type: "section",
-        title: "Problem",
-        compact: true,
+        title: "In short",
         paragraphs: [
-          "Finding a charging station is only the beginning. Drivers also need to check station details, book a session, pay, and follow their charging progress.",
-          "The challenge was to connect these steps in a clear journey, from finding a charger to getting back on the road. The experience also needed to support cancellations, booking changes, and repeat visits.",
+          "Ashipa Electric’s brief was clear on features and open on the hard questions: should drivers need a code to confirm payment, should pricing be by time or energy, do drivers have to be at the station for their whole slot? I answered those in the design: slot-based booking with a full cost breakdown before payment, a wallet secured by a 4-digit PIN, and charging screens built for a driver standing at the charger.",
+          "When a private EV owner and his fleet drivers tested the app, they found the cancellation information wasn’t good enough, so I made the fee, refund eligibility and timing explicit, and showed the fee before and during cancelling.",
         ],
       },
       {
-        type: "highlight",
-        value: "2 platforms",
-        text: "A mobile app for finding, booking, and managing charging sessions, supported by a website that introduces the service and showcases charging stations.",
-      },
-      {
         type: "section",
-        title: "Role",
+        title: "The brief",
+        heading: "The brief left the hard questions open",
         paragraphs: [
-          "I designed the SureChargeX mobile app and website. The app covered onboarding, station discovery, booking, payments, and charging. I also designed supporting flows for vehicle details, saved stations, booking history, and help.",
-          "For the website, I designed pages that explain the service, highlight its features, and guide visitors towards the app.",
+          "The brief from Ashipa Electric was for Phase 1 of a charging platform: a driver app and a web console for operators. For drivers, it asked for search within a set radius, station details, time-slot booking, wallet payment for the slot, payment for energy used, and starting and stopping a charge from the app.",
+          "It also listed five open questions, and those are where the design work was:",
+          {
+            list: [
+              "Do drivers charge by themselves or with attendants?",
+              "If by themselves, should they need a code to confirm identity and payment?",
+              "Should pricing be by time, energy used, or charger type?",
+              "Do metrics matter, and to whom?",
+              "Does a driver have to be at the station for their whole slot?",
+            ],
+          },
+          "Finding a charging station is only the beginning. Drivers also need to check station details, book a session, pay, and follow their charging progress, and the journey has to hold up when they cancel, change plans, or come back.",
         ],
       },
       {
@@ -139,16 +156,66 @@ export const caseStudies: CaseStudy[] = [
         },
       },
       {
+        type: "section",
+        title: "Research",
+        heading: "Learning from international products and standards",
+        paragraphs: [
+          "I hadn’t found a local equivalent to learn from, so I looked at international products and standards.",
+          "The US National Electric Vehicle Infrastructure (NEVI) standards for public chargers require real-time station status, uptime, real-time pricing with any extra costs “displayed and explained”, hours of availability, port and connector types, and multiple payment methods. I used them as a checklist for what each station screen must answer.",
+          "I also reviewed the leading US driver apps:",
+          {
+            table: {
+              head: ["App", "Strong at", "Where the journey breaks"],
+              rows: [
+                ["PlugShare", "Discovery: map, plug filters, reliability scores", "No booking"],
+                ["ChargePoint", "A Waitlist queue at busy stations", "No advance booking"],
+                ["Electrify America", "Live availability and in-session progress", "No reservations; you find out on arrival"],
+                ["EVgo", "Reservations and a vehicle garage", "Select locations only, with late cancellation and no-show fees"],
+              ],
+            },
+          },
+          "The pattern: booking is usually an add-on at a few sites, and where it exists, its rules (fees, hold windows, no-shows) are where drivers’ trust is won or lost. SureChargeX needed booking as the backbone, with its rules visible before anyone pays. These references could not tell me how our own drivers would behave, which is why testing with real drivers mattered later.",
+        ],
+      },
+      {
         type: "quote",
         text: "Finding a charger is one step. The experience needs to carry you through the whole charge.",
       },
       {
         type: "section",
-        title: "Solution",
+        title: "Decision 1",
+        heading: "Book a slot, see every cost before paying",
         paragraphs: [
-          "I organised the app around three connected tasks: find a station, book a session, and charge.",
-          "Drivers can explore stations using map and list views, then narrow their options with search and filters. Station details lead into booking, payment selection, and confirmation. After booking, drivers can review upcoming sessions, manage cancellations, and access their booking history. Dedicated charging screens show how to start, monitor, stop, and complete a session.",
-          "The wallet, payment history, saved stations, and vehicle details support future visits. On the website, feature highlights, station listings, FAQs, and a simple introduction explain how the service works before someone opens the app.",
+          "The brief asked for slots in time ranges, so booking is built around a day and hour picker. Each slot shows its state: taken, selected, or “Tap to book this slot”. Above the slots, one line answers whether drivers must stay for the whole slot: “Charging slots are only valid for the specified time. Overstaying beyond the allotted time may incur additional charges.”",
+          "On pricing, the design uses both models the brief described: a booking fee reserves the slot, and the driver pays for the energy they use. Before confirming, the booking summary shows the charger and slot, connector and power, date, time and duration, parking fee, booking fee, tax and an estimated total, and drivers can change their vehicle or payment method from there. The first time a driver sees a price is not at the charger.",
+        ],
+      },
+      {
+        type: "section",
+        title: "Decision 2",
+        heading: "Make the cost of changing plans clear, because drivers told us it wasn’t",
+        paragraphs: [
+          "Booking asks drivers to commit early, and plans change. A private EV owner tested the app and involved his fleet drivers, and they pointed out that the booking experience did not provide proper cancellation information.",
+          "In response, I added details covering cancellation fees, refund eligibility and cancellation timing, and made the fee impossible to miss. The design states it at two points: on the slot screen before payment, and again in the cancel confirmation (“Your booking fee will not be refunded. Are you sure you want to cancel your reserved slot?”). No one finds out afterwards.",
+          "Cancelling asks for a reason from a short list: change of plans, high charging cost, station too far away, charging time not suitable, weather, technical issues at the station, found another station, or other. Drivers get a quick exit, and operators learn why slots go unused, which answers the brief’s “metrics, to whom?” with something actionable. Cancelled bookings keep their reason and offer “Book again”.",
+        ],
+      },
+      {
+        type: "section",
+        title: "Decision 3",
+        heading: "A wallet, protected by a PIN",
+        paragraphs: [
+          "The brief raised the question of a code to confirm identity and payment. I answered with a 4-digit wallet PIN, set up once and entered to authorise each transaction, so a phone left unlocked at a charger cannot spend the driver’s balance. Mismatched entries get a plain message: “PINs do not match. Please try again.”",
+          "Drivers must fund their wallet before booking, so adding money had to connect to making a reservation. When the balance is too low, the payment screen says so and offers a top-up in place, rather than failing at confirmation. The wallet can be topped up by card, bank transfer, PayPal, Apple Pay or Google Pay.",
+        ],
+      },
+      {
+        type: "section",
+        title: "Decision 4",
+        heading: "Design for the driver at the charger",
+        paragraphs: [
+          "Drivers add their vehicle once, including its charging port type, and station details show the connector on each charger slot, so the driver books a charger their car can use.",
+          "At the charger, the driver is holding a cable, not studying a screen. The charge screen starts with one instruction, “Plug in first to start charging”, then a single “Charge vehicle” action. While charging, the battery percentage is the largest thing on screen, with time remaining and the running total below it, and a clear stop control. The session ends on a “Charging complete” screen that lists any idle fee, so overstaying has a visible cost.",
         ],
       },
       {
@@ -165,10 +232,26 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         type: "section",
-        title: "Lessons",
+        title: "Where it stands",
         paragraphs: [
-          "A charging experience needs care between the main steps as well as within them. Booking confirmations, cancellations, and completed sessions each need to make the next action clear.",
-          "In a future iteration, I would test these transitions with drivers at a charging station. I would focus on whether instructions and status updates remain clear when their attention is split between the phone and the charger.",
+          "SureChargeX is live on mobile and web; the website’s job is to explain booking-first charging and get people into the app. I don’t have post-launch data yet, and no measured usability or adoption improvement is claimed here. The brief asked whether metrics matter and to whom; these are the ones I’d use to judge the design:",
+          {
+            list: [
+              { term: "Booking completion:", text: "drivers who start a booking and confirm it." },
+              { term: "Cancellation reasons:", text: "which reasons dominate, from the data the cancel flow collects." },
+              { term: "Overstay and idle fees:", text: "whether the slot rules are understood." },
+              { term: "Repeat bookings:", text: "drivers who tap “Book again”." },
+            ],
+          },
+        ],
+      },
+      {
+        type: "section",
+        title: "Reflection",
+        heading: "What I’d do differently",
+        paragraphs: [
+          "Completing the main flow is not enough. Drivers also need clear information when plans change, money is involved, or a session ends.",
+          "Next, I would check the revised cancellation details with drivers, and test the transitions (confirmation, cancellation, completion) at a charging station, where attention is split between the phone and the charger. I would also revisit how a booking-first, account-based model fits NEVI’s expectation that public charging should not require membership, for example a guest or pay-at-charger path.",
         ],
       },
       {
