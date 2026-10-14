@@ -281,7 +281,7 @@ export const caseStudies: CaseStudy[] = [
               highlights: [{ x: 4, y: 15.2, w: 92, h: 5.4 }, { x: 2, y: 43.2, w: 96, h: 6.2 }],
             },
             {
-              src: "/images/case-studies/surechargex/screens/booking-summary.png",
+              src: "/images/case-studies/surechargex/screens/booking-summary-v2.png",
               width: 786,
               height: 1966,
               alt: "Booking summary showing wallet payment, vehicle, station, charger, and the date, time, fees, estimate and tax.",
@@ -345,7 +345,7 @@ export const caseStudies: CaseStudy[] = [
             columns: 2,
             screens: [
             {
-              src: "/images/case-studies/surechargex/screens/upcoming.png",
+              src: "/images/case-studies/surechargex/screens/upcoming-v2.png",
               width: 786,
               height: 1704,
               alt: "My Booking, Upcoming tab, with a booking card and Cancel and Get directions buttons.",
@@ -354,7 +354,7 @@ export const caseStudies: CaseStudy[] = [
               highlights: [{ x: 8, y: 46.2, w: 31, h: 4.6 }],
             },
             {
-              src: "/images/case-studies/surechargex/screens/cancel-overlay.png",
+              src: "/images/case-studies/surechargex/screens/cancel-overlay-v2.png",
               width: 786,
               height: 1704,
               alt: "Cancel Booking sheet: Your booking fee will not be refunded. Are you sure you want to cancel your reserved slot?",
@@ -372,7 +372,7 @@ export const caseStudies: CaseStudy[] = [
               highlights: [{ x: 4, y: 16.3, w: 92, h: 51.4 }],
             },
             {
-              src: "/images/case-studies/surechargex/screens/cancelled.png",
+              src: "/images/case-studies/surechargex/screens/cancelled-v2.png",
               width: 786,
               height: 1704,
               alt: "Cancelled tab with booking cards showing the reason for cancellation and Book again.",
