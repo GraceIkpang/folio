@@ -188,7 +188,7 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "image",
         image: {
-          src: "/images/case-studies/surechargex/app-screens-v4.png",
+          src: "/images/case-studies/surechargex/app-screens-v5.png",
           width: 1328,
           height: 747,
           displayWidth: 664,
@@ -278,7 +278,7 @@ export const caseStudies: CaseStudy[] = [
               alt: "Booking screen with a date strip, taken slots, a selected 13:00 to 14:00 slot, and the booking fee and overstay notes.",
               label: "Choose a slot",
               note: "The fee and the overstay rule, up front",
-              highlights: [{ x: 4, y: 15.2, w: 92, h: 5.4 }, { x: 4, y: 43.2, w: 92, h: 6.2 }],
+              highlights: [{ x: 4, y: 15.2, w: 92, h: 5.4 }, { x: 2, y: 43.2, w: 96, h: 6.2 }],
             },
             {
               src: "/images/case-studies/surechargex/screens/booking-summary.png",
@@ -482,7 +482,7 @@ export const caseStudies: CaseStudy[] = [
               alt: "Charge screen: Plug in first to start charging, with the vehicle card and a Charge vehicle button.",
               label: "Plug in first",
               note: "One instruction, one action",
-              highlights: [{ x: 14, y: 12.2, w: 62, h: 3.6 }],
+              highlights: [{ x: 11.5, y: 12.2, w: 66, h: 3.6 }],
             },
             {
               src: "/images/case-studies/surechargex/screens/charge-start.png",
