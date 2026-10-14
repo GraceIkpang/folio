@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { CSSProperties } from "react";
 import type { CaseStudyBlock, SectionContent } from "@/content/case-studies";
 import { BlockLabel } from "./block-label";
+import { SureChargeXJourney } from "./surechargex-journey";
 
 type ImageData = Extract<CaseStudyBlock, { type: "image" }>["image"];
 type CaptionData = { start: string; end?: string };
@@ -334,6 +335,9 @@ function Block({ block }: { block: CaseStudyBlock }) {
           </div>
         </figure>
       );
+
+    case "animation":
+      return <SureChargeXJourney alt={block.alt} />;
 
     case "polaroid":
       return (

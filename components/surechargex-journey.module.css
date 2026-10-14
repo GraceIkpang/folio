@@ -1,0 +1,209 @@
+/* The SureChargeX journey: find a station, drive to it, charge.
+   Everything is placed in percentages of the 1328 × 747 artwork so the
+   scene scales with the column. Timings follow the plan agreed with Grace:
+   phones rise (0–0.8s), the map finds a station (0.8–1.6s), the route
+   draws (1.6–2.6s), then the battery fills (2.6–4s, driven from JS). */
+
+.stage {
+  position: relative;
+  aspect-ratio: 1328 / 747;
+  overflow: hidden;
+}
+
+.fill {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.phone {
+  position: absolute;
+}
+
+/* The phone's screen: parts are exported at screen size and sit in here. */
+.screen {
+  position: absolute;
+  overflow: hidden;
+  border-radius: 14% / 6.5%;
+  container-type: inline-size;
+}
+
+.sheet,
+.eta {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.route {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.pulse {
+  position: absolute;
+  left: 45.6%;
+  top: 38.8%;
+  width: 7cqw;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: rgb(37 211 102 / 0.45);
+  opacity: 0;
+}
+
+/* The bar's inner track; the green fill slides in from its left end. */
+.track {
+  position: absolute;
+  left: 6.616%;
+  top: 45.716%;
+  width: 87.4%;
+  height: 8.685%;
+  overflow: hidden;
+  border-radius: 999px;
+}
+
+.batteryFill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 55.17%;
+  height: 100%;
+}
+
+.pill {
+  position: absolute;
+  left: 50.25%;
+  top: 50.06%;
+  translate: -50% -50%;
+  display: flex;
+  align-items: center;
+  gap: 0.7cqw;
+  height: 6.1cqw;
+  padding: 0 2.4cqw;
+  border: 0.15cqw solid rgb(0 0 0 / 0.08);
+  border-radius: 999px;
+  background: #fff;
+  color: #252525;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.pill svg {
+  width: 1.9cqw;
+  height: auto;
+}
+
+.percent {
+  font-size: 4cqw;
+  letter-spacing: -0.02em;
+}
+
+.percent small {
+  font-size: 2.4cqw;
+}
+
+.timer {
+  position: absolute;
+  left: 50%;
+  top: 61.2%;
+  translate: -50% 0;
+  display: flex;
+  align-items: baseline;
+  gap: 1.8cqw;
+  color: rgb(37 211 102);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.timer strong {
+  font-size: 5.6cqw;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+.timer span {
+  font-size: 3.2cqw;
+}
+
+/* ---- Motion: only once the scene is armed (never for reduced motion) ---- */
+
+.stage:not([data-state="static"]) .rise {
+  animation: rise 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.stage:not([data-state="static"]) .riseLate {
+  animation: rise 0.8s 0.15s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.stage:not([data-state="static"]) .pulse {
+  animation: pulse 0.55s 0.8s ease-out 2 both;
+}
+
+.stage:not([data-state="static"]) .sheet {
+  animation: sheet-up 0.65s 0.95s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.stage:not([data-state="static"]) .route path {
+  animation: draw 0.7s 1.6s ease-in-out both;
+}
+
+.stage:not([data-state="static"]) .eta {
+  animation: drop-in 0.45s 2.15s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* Armed: hold every animation on its first frame until the scene is seen. */
+.stage[data-state="armed"] * {
+  animation-play-state: paused !important;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    translate: 0 8%;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0;
+    scale: 0.4;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    scale: 2.6;
+  }
+}
+
+@keyframes sheet-up {
+  from {
+    translate: 0 56%;
+  }
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+
+@keyframes drop-in {
+  from {
+    opacity: 0;
+    translate: 0 -6%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage * {
+    animation: none !important;
+  }
+}

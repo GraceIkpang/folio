@@ -107,6 +107,8 @@ export type CaseStudyBlock = (
         screens: PhoneScreen[];
       }[];
     }
+  /** An animated scene in place of a still image; `name` picks which one. */
+  | { type: "animation"; name: "surechargex-journey"; alt: string }
   /** One screen with numbered markers explained in a list beside it. */
   | {
       type: "annotated";
@@ -186,14 +188,9 @@ export const caseStudies: CaseStudy[] = [
         ],
       },
       {
-        type: "image",
-        image: {
-          src: "/images/case-studies/surechargex/app-screens-v5.png",
-          width: 1328,
-          height: 747,
-          displayWidth: 844,
-          alt: "Three app screens: navigating to a station, the map of stations near you, and a charging session for a KIA EV6.",
-        },
+        type: "animation",
+        name: "surechargex-journey",
+        alt: "Three app screens: navigating to a station, the map of stations near you, and a charging session for a KIA EV6.",
       },
       {
         type: "section",
