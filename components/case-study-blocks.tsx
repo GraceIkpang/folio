@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import type { CaseStudyBlock, SectionContent } from "@/content/case-studies";
+import { BlockLabel } from "./block-label";
 
 type ImageData = Extract<CaseStudyBlock, { type: "image" }>["image"];
 type CaptionData = { start: string; end?: string };
@@ -229,6 +230,109 @@ function Block({ block }: { block: CaseStudyBlock }) {
         <blockquote className="max-w-[410px] -rotate-1 font-hand text-[24px] leading-[34px] text-accent motion-reduce:rotate-0">
           <p>{block.text}</p>
         </blockquote>
+      );
+
+    case "screens":
+      return (
+        <figure className="flex flex-col gap-6">
+          {block.label && <BlockLabel {...block.label} />}
+          {block.groups.map((group, g) => (
+            <div key={g}>
+              {group.title && (
+                <p className="pb-3 font-display text-meta tracking-[0.78px] text-muted uppercase">
+                  {group.title}
+                </p>
+              )}
+              <ol
+                className={`grid grid-cols-2 gap-x-4 gap-y-6 ${
+                  group.columns === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2"
+                }`}
+              >
+                {group.screens.map((screen, i) => (
+                  <li key={screen.src} className="flex flex-col">
+                    <div className="relative overflow-hidden rounded-[18px] border border-line bg-surface">
+                      <Image
+                        src={screen.src}
+                        alt={screen.alt}
+                        width={screen.width}
+                        height={screen.height}
+                        sizes={group.columns === 3 ? "(min-width: 640px) 211px, 45vw" : "(min-width: 640px) 324px, 45vw"}
+                        className="h-auto w-full"
+                      />
+                      {screen.highlights?.map((h, k) => (
+                        <span
+                          key={k}
+                          aria-hidden="true"
+                          className="absolute rounded-md border-2 border-accent bg-accent/5"
+                          style={{ left: `${h.x}%`, top: `${h.y}%`, width: `${h.w}%`, height: `${h.h}%` }}
+                        />
+                      ))}
+                    </div>
+                    <p className="pt-2.5 text-[12px] leading-[19px]">
+                      <span className="font-display font-semibold text-ink">
+                        {group.screens.length > 1 && <span className="text-accent">{i + 1} </span>}
+                        {screen.label}
+                      </span>
+                      {screen.note && <span className="block text-muted">{screen.note}</span>}
+                    </p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ))}
+        </figure>
+      );
+
+    case "annotated":
+      return (
+        <figure className="flex flex-col gap-6">
+          {block.label && <BlockLabel {...block.label} />}
+          <div className="grid gap-8 sm:grid-cols-[260px_1fr] sm:items-start">
+            <div className="relative mx-auto w-full max-w-[260px] overflow-hidden rounded-[18px] border border-line bg-surface">
+              <Image
+                src={block.image.src}
+                alt={block.image.alt}
+                width={block.image.width}
+                height={block.image.height}
+                sizes="260px"
+                className="h-auto w-full"
+              />
+              {block.markers.map((m, i) => (
+                <span
+                  key={m.title}
+                  aria-hidden="true"
+                  className="absolute grid size-5 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-accent font-display text-[11px] leading-none font-semibold text-white ring-2 ring-white"
+                  style={{ left: `${m.x}%`, top: `${m.y}%` }}
+                >
+                  {i + 1}
+                </span>
+              ))}
+            </div>
+            <div>
+              <ol className="flex flex-col gap-3.5">
+                {block.markers.map((m, i) => (
+                  <li key={m.title} className="flex gap-3">
+                    <span
+                      aria-hidden="true"
+                      className="grid size-5 shrink-0 place-items-center rounded-full bg-accent font-display text-[11px] leading-none font-semibold text-white"
+                    >
+                      {i + 1}
+                    </span>
+                    <span className="text-body">
+                      <span className="font-display font-semibold">{m.title}</span>
+                      <span className="block text-muted">{m.text}</span>
+                    </span>
+                  </li>
+                ))}
+              </ol>
+              {block.note && (
+                <p className="mt-5 border-t border-line pt-4 text-[12px] leading-[19px] text-muted">
+                  {block.note}
+                </p>
+              )}
+            </div>
+          </div>
+        </figure>
       );
 
     case "polaroid":

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BlockLabel } from "@/components/block-label";
 import { ButtonLink } from "@/components/button-link";
 import { LoopingVideo } from "@/components/looping-video";
 import { PageIntro } from "@/components/page-intro";
@@ -58,7 +59,7 @@ export default async function ShotPage(props: PageProps<"/explorations/[slug]">)
       </PageIntro>
 
       <div className="flex flex-col gap-[18px]">
-        {shot.labels && <BlockLabel {...shot.labels.video} />}
+        {shot.labels && <BlockLabel {...shot.labels.video} className="-mb-2" />}
         {shot.video && (
           <WindowFrame>
             <LoopingVideo
@@ -74,7 +75,7 @@ export default async function ShotPage(props: PageProps<"/explorations/[slug]">)
         )}
         {shot.labels && (
           <div className="pt-10">
-            <BlockLabel {...shot.labels.screens} />
+            <BlockLabel {...shot.labels.screens} className="-mb-2" />
           </div>
         )}
         {shot.screens.length > 0 ? (
@@ -118,15 +119,5 @@ export default async function ShotPage(props: PageProps<"/explorations/[slug]">)
         </Link>
       </nav>
     </main>
-  );
-}
-
-/** A short pink handwritten heading with a grey line under it, like the KIPA case study. */
-function BlockLabel({ title, text }: { title: string; text: string }) {
-  return (
-    <div className="-mb-2 flex flex-col gap-0.5">
-      <h2 className="font-hand text-[20px] leading-7 text-accent">{title}</h2>
-      <p className="text-[12px] leading-[19px] text-muted">{text}</p>
-    </div>
   );
 }

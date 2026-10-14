@@ -29,6 +29,26 @@ export type SectionContent =
   | { list: ListItem[] }
   | { table: { head: string[]; rows: string[][] } };
 
+/** A region of an image, in percent of its width and height. */
+type Highlight = { x: number; y: number; w: number; h: number };
+
+/** One flat app screen in a sequence. */
+type PhoneScreen = {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+  /** Short step name under the screen, e.g. "Choose a slot". */
+  label: string;
+  /** One line under the label saying what to notice. */
+  note?: string;
+  /** Pink outlines drawing the eye to part of the screen. */
+  highlights?: Highlight[];
+};
+
+/** A small pink handwritten heading with a grey line, above a visual. */
+type VisualLabel = { title: string; text: string };
+
 export type CaseStudyBlock = (
   | {
       type: "section";
@@ -76,6 +96,26 @@ export type CaseStudyBlock = (
   | { type: "quote"; text: string }
   /** A tilted, pinned photo. The caption is part of the image. */
   | { type: "polaroid"; image: Image; caption: string }
+  /** App screens in numbered steps, optionally split into groups (e.g. before and after). */
+  | {
+      type: "screens";
+      label?: VisualLabel;
+      groups: {
+        title?: string;
+        /** Screens per row on larger screens (always 2 on phones). */
+        columns: 2 | 3;
+        screens: PhoneScreen[];
+      }[];
+    }
+  /** One screen with numbered markers explained in a list beside it. */
+  | {
+      type: "annotated";
+      label?: VisualLabel;
+      image: Omit<Image, "displayWidth">;
+      markers: { x: number; y: number; title: string; text: string }[];
+      /** A short honest note under the list, e.g. what the screen doesn't show yet. */
+      note?: string;
+    }
 ) & {
   /** Override the space above this block, in pixels. */
   spaceAbove?: number;
@@ -111,11 +151,11 @@ export const caseStudies: CaseStudy[] = [
     status: "Live",
     website: "https://surecharge.us/",
     hero: {
-      src: "/images/case-studies/surechargex/hero.png",
+      src: "/images/case-studies/surechargex/hero-v2.png",
       width: 1328,
       height: 664,
       displayWidth: 664,
-      alt: "The SureChargeX website on a laptop, with the app’s station list on a phone beside it.",
+      alt: "The SureChargeX website on a laptop, with the app’s slot booking screen on a phone beside it.",
     },
     blocks: [
       {
@@ -178,6 +218,29 @@ export const caseStudies: CaseStudy[] = [
         ],
       },
       {
+        type: "annotated",
+        label: {
+          title: "The station screen, checked against NEVI",
+          text: "Each number marks a requirement the screen answers before a driver books.",
+        },
+        image: {
+          src: "/images/case-studies/surechargex/screens/station-detail-annotated.png",
+          width: 784,
+          height: 2218,
+          alt: "The Technicolor EV Station detail screen: open hours, chargers available, each charger’s slots with connector and power, Available and In use statuses, amenities with the parking fee, and the price with a Book now button.",
+        },
+        markers: [
+          { x: 62, y: 17.4, title: "Hours of availability", text: "“Open | 24hrs” sits in the header." },
+          { x: 39, y: 26.7, title: "Real-time availability", text: "Chargers available out of the total, “6/12”." },
+          { x: 67.5, y: 34.6, title: "Connector types", text: "Each slot names the connector it supports." },
+          { x: 67.5, y: 38.3, title: "Power", text: "Each slot shows its charging power." },
+          { x: 69, y: 58.2, title: "Real-time status", text: "Every charger is marked Available or In use." },
+          { x: 79, y: 79.6, title: "Extra costs, displayed", text: "The parking fee and amenities, before booking." },
+          { x: 34.5, y: 94.3, title: "Real-time pricing", text: "The price sits on the booking bar." },
+        ],
+        note: "Not shown yet: station uptime, which both NEVI and the brief ask for.",
+      },
+      {
         type: "quote",
         text: "Finding a charger is one step. The experience needs to carry you through the whole charge.",
       },
@@ -191,6 +254,53 @@ export const caseStudies: CaseStudy[] = [
         ],
       },
       {
+        type: "screens",
+        label: {
+          title: "From station to confirmed booking",
+          text: "Every cost appears before the driver pays.",
+        },
+        groups: [
+          {
+            columns: 2,
+            screens: [
+            {
+              src: "/images/case-studies/surechargex/screens/station-detail-phone.png",
+              width: 784,
+              height: 1704,
+              alt: "Station detail with Charger 1 expanded, showing two slots with their connector and power.",
+              label: "Pick a charger",
+              note: "Connector and power on each slot",
+            },
+            {
+              src: "/images/case-studies/surechargex/screens/booking.png",
+              width: 786,
+              height: 1704,
+              alt: "Booking screen with a date strip, taken slots, a selected 13:00 to 14:00 slot, and the booking fee and overstay notes.",
+              label: "Choose a slot",
+              note: "The fee and the overstay rule, up front",
+              highlights: [{ x: 4, y: 15.2, w: 92, h: 5.4 }, { x: 4, y: 43.2, w: 92, h: 6.2 }],
+            },
+            {
+              src: "/images/case-studies/surechargex/screens/booking-summary.png",
+              width: 786,
+              height: 1966,
+              alt: "Booking summary showing wallet payment, vehicle, station, charger, and the date, time, fees, estimate and tax.",
+              label: "Review every cost",
+              note: "Fees, tax and the estimate before confirming",
+              highlights: [{ x: 4, y: 64, w: 92, h: 25 }],
+            },
+            {
+              src: "/images/case-studies/surechargex/screens/booking-confirmed.png",
+              width: 786,
+              height: 1704,
+              alt: "Booking Confirmed overlay with a View Booking button.",
+              label: "Booked",
+            },
+            ],
+          },
+        ],
+      },
+      {
         type: "section",
         title: "Decision 2",
         heading: "Make the cost of changing plans clear, because drivers told us it wasn’t",
@@ -198,6 +308,80 @@ export const caseStudies: CaseStudy[] = [
           "Booking asks drivers to commit early, and plans change. A private EV owner tested the app and involved his fleet drivers, and they pointed out that the booking experience did not provide proper cancellation information.",
           "In response, I added details covering cancellation fees, refund eligibility and cancellation timing, and made the fee impossible to miss. The design states it at two points: on the slot screen before payment, and again in the cancel confirmation (“Your booking fee will not be refunded. Are you sure you want to cancel your reserved slot?”). No one finds out afterwards.",
           "Cancelling asks for a reason from a short list: change of plans, high charging cost, station too far away, charging time not suitable, weather, technical issues at the station, found another station, or other. Drivers get a quick exit, and operators learn why slots go unused, which answers the brief’s “metrics, to whom?” with something actionable. Cancelled bookings keep their reason and offer “Book again”.",
+        ],
+      },
+      {
+        type: "screens",
+        label: {
+          title: "Before and after testing",
+          text: "What changed after the fleet drivers said cancellation wasn’t clear.",
+        },
+        groups: [
+          {
+            title: "Before and after",
+            columns: 2,
+            screens: [
+            {
+              src: "/images/case-studies/surechargex/screens/booking-before-testing.png",
+              width: 786,
+              height: 1704,
+              alt: "The booking screen before testing, with no mention of cancellation.",
+              label: "Before testing",
+              note: "No cancellation information",
+            },
+            {
+              src: "/images/case-studies/surechargex/screens/booking.png",
+              width: 786,
+              height: 1704,
+              alt: "The revised booking screen with the booking fee note at the top.",
+              label: "After",
+              note: "The fee is stated before payment",
+              highlights: [{ x: 4, y: 15.2, w: 92, h: 5.4 }],
+            },
+            ],
+          },
+          {
+            title: "Cancelling, after testing",
+            columns: 2,
+            screens: [
+            {
+              src: "/images/case-studies/surechargex/screens/upcoming.png",
+              width: 786,
+              height: 1704,
+              alt: "My Booking, Upcoming tab, with a booking card and Cancel and Get directions buttons.",
+              label: "Upcoming booking",
+              note: "Cancel sits next to directions",
+              highlights: [{ x: 8, y: 46.2, w: 31, h: 4.6 }],
+            },
+            {
+              src: "/images/case-studies/surechargex/screens/cancel-overlay.png",
+              width: 786,
+              height: 1704,
+              alt: "Cancel Booking sheet: Your booking fee will not be refunded. Are you sure you want to cancel your reserved slot?",
+              label: "Confirm",
+              note: "The fee, stated again",
+              highlights: [{ x: 4, y: 75.8, w: 92, h: 13.6 }],
+            },
+            {
+              src: "/images/case-studies/surechargex/screens/cancel-reasons.png",
+              width: 786,
+              height: 1704,
+              alt: "Cancel Booking reason list with Change of plans selected.",
+              label: "Say why",
+              note: "Operators learn why slots go unused",
+              highlights: [{ x: 4, y: 16.3, w: 92, h: 51.4 }],
+            },
+            {
+              src: "/images/case-studies/surechargex/screens/cancelled.png",
+              width: 786,
+              height: 1704,
+              alt: "Cancelled tab with booking cards showing the reason for cancellation and Book again.",
+              label: "Cancelled",
+              note: "The reason is kept, with Book again",
+              highlights: [{ x: 8, y: 45.2, w: 84, h: 7.1 }],
+            },
+            ],
+          },
         ],
       },
       {
@@ -210,6 +394,69 @@ export const caseStudies: CaseStudy[] = [
         ],
       },
       {
+        type: "screens",
+        label: {
+          title: "Securing the wallet",
+          text: "Set up once; low balance is caught before paying, not at confirmation.",
+        },
+        groups: [
+          {
+            columns: 3,
+            screens: [
+            {
+              src: "/images/case-studies/surechargex/screens/pin-setup.png",
+              width: 786,
+              height: 1704,
+              alt: "Set Up PIN screen explaining secure transactions, quick access and encrypted storage.",
+              label: "Why a PIN",
+              note: "The benefits, before asking",
+              highlights: [{ x: 4, y: 48.2, w: 92, h: 31.5 }],
+            },
+            {
+              src: "/images/case-studies/surechargex/screens/pin-create.png",
+              width: 786,
+              height: 1704,
+              alt: "Create your 4-digit PIN screen with a number pad.",
+              label: "Create PIN",
+            },
+            {
+              src: "/images/case-studies/surechargex/screens/pin-wrong.png",
+              width: 786,
+              height: 1704,
+              alt: "Confirm PIN screen showing PINs do not match. Please try again.",
+              label: "Mismatch",
+              note: "A plain message",
+              highlights: [{ x: 4, y: 51, w: 92, h: 5.4 }],
+            },
+            {
+              src: "/images/case-studies/surechargex/screens/wallet-insufficient.png",
+              width: 786,
+              height: 1704,
+              alt: "Select Payment Method with the wallet at zero balance and a Top up button, plus card, bank transfer, PayPal, Apple Pay and Google Pay.",
+              label: "Low balance",
+              note: "Top up, right where you pay",
+              highlights: [{ x: 4, y: 15.8, w: 92, h: 9.4 }],
+            },
+            {
+              src: "/images/case-studies/surechargex/screens/wallet-top-up.png",
+              width: 786,
+              height: 1858,
+              alt: "Add Money screen with the current balance, an amount field, quick amounts and top-up methods.",
+              label: "Add money",
+            },
+            {
+              src: "/images/case-studies/surechargex/screens/wallet-top-up-success.png",
+              width: 786,
+              height: 1704,
+              alt: "Top-Up Successful screen with the amount, date, method and status, and Proceed to Payment.",
+              label: "Topped up",
+              note: "Straight back to paying",
+            },
+            ],
+          },
+        ],
+      },
+      {
         type: "section",
         title: "Decision 4",
         heading: "Design for the driver at the charger",
@@ -219,16 +466,52 @@ export const caseStudies: CaseStudy[] = [
         ],
       },
       {
-        type: "polaroid",
-        caption: "From choosing a station to completing a charge.",
-        image: {
-          src: "/images/case-studies/surechargex/charging-flow.png",
-          width: 1463,
-          height: 1168,
-          // Exported at 3x, so it shows at a third of its pixel width.
-          displayWidth: 488,
-          alt: "The charging flow: a vehicle card for a KIA EV6 leading to a “Charging complete” screen, above a phone showing the car at 51%.",
+        type: "screens",
+        label: {
+          title: "At the charger",
+          text: "One instruction, one action, then progress readable at a glance.",
         },
+        groups: [
+          {
+            columns: 2,
+            screens: [
+            {
+              src: "/images/case-studies/surechargex/screens/charge-plug-in.png",
+              width: 786,
+              height: 1704,
+              alt: "Charge screen: Plug in first to start charging, with the vehicle card and a Charge vehicle button.",
+              label: "Plug in first",
+              note: "One instruction, one action",
+              highlights: [{ x: 14, y: 12.2, w: 62, h: 3.6 }],
+            },
+            {
+              src: "/images/case-studies/surechargex/screens/charge-start.png",
+              width: 786,
+              height: 1704,
+              alt: "KIA EV6 at 23% battery with time left to complete the charge and a Start charging button.",
+              label: "Start",
+              note: "Battery level is the largest thing on screen",
+              highlights: [{ x: 4, y: 45, w: 92, h: 10.3 }],
+            },
+            {
+              src: "/images/case-studies/surechargex/screens/charge-stop.png",
+              width: 786,
+              height: 1704,
+              alt: "Charging at 51% with time remaining, the running total and a Stop charging button.",
+              label: "Charging",
+              note: "Time left, running total, a clear stop",
+              highlights: [{ x: 4, y: 88.6, w: 92, h: 6 }],
+            },
+            {
+              src: "/images/case-studies/surechargex/screens/charge-complete.png",
+              width: 786,
+              height: 1704,
+              alt: "Charging complete sheet with a Pay button.",
+              label: "Complete",
+            },
+            ],
+          },
+        ],
       },
       {
         type: "section",
