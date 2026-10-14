@@ -256,7 +256,7 @@ function Block({ block }: { block: CaseStudyBlock }) {
                         alt={screen.alt}
                         width={screen.width}
                         height={screen.height}
-                        sizes={group.columns === 3 ? "(min-width: 640px) 211px, 45vw" : "(min-width: 640px) 324px, 45vw"}
+                        sizes={group.columns === 3 ? "(min-width: 640px) 271px, 45vw" : "(min-width: 640px) 414px, 45vw"}
                         className="h-auto w-full"
                       />
                       {screen.highlights?.map((h, k) => (

@@ -38,7 +38,7 @@ export default async function CaseStudyPage(props: PageProps<"/work/[slug]">) {
   if (!study) notFound();
 
   return (
-    <main className="mx-auto max-w-[664px] border-b border-line">
+    <main className="border-b border-line">
       <div className="flex items-center justify-between pt-11">
         <BackLink href="/work" label="Work" />
         <p className="text-meta text-muted">{study.year}</p>
@@ -120,7 +120,7 @@ function BackToWork() {
 /** A placeholder page for a project whose case study isn't ready yet. */
 function ComingSoon({ study }: { study: UpcomingCaseStudy }) {
   return (
-    <main className="mx-auto max-w-[664px] border-b border-line">
+    <main className="border-b border-line">
       <div className="pt-11">
         <BackLink href="/work" label="Work" />
       </div>
