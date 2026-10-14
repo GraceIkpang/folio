@@ -438,9 +438,9 @@ export const caseStudies: CaseStudy[] = [
               highlights: [{ x: 4, y: 15.8, w: 92, h: 9.4 }],
             },
             {
-              src: "/images/case-studies/surechargex/screens/wallet-top-up.png",
+              src: "/images/case-studies/surechargex/screens/wallet-top-up-v2.png",
               width: 786,
-              height: 1858,
+              height: 1704,
               alt: "Add Money screen with the current balance, an amount field, quick amounts and top-up methods.",
               label: "Add money",
             },
