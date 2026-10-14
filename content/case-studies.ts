@@ -224,7 +224,7 @@ export const caseStudies: CaseStudy[] = [
           text: "Each number marks a requirement the screen answers before a driver books.",
         },
         image: {
-          src: "/images/case-studies/surechargex/screens/station-detail-annotated.png",
+          src: "/images/case-studies/surechargex/screens/station-detail-annotated-v2.png",
           width: 784,
           height: 2834,
           alt: "The Technicolor EV Station detail screen: open hours and uptime, chargers available, each charger’s slots with connector and power, Available and In use statuses, amenities with the parking fee, photos and reviews, and the price with a Book now button.",
@@ -264,7 +264,7 @@ export const caseStudies: CaseStudy[] = [
             columns: 2,
             screens: [
             {
-              src: "/images/case-studies/surechargex/screens/station-detail-phone.png",
+              src: "/images/case-studies/surechargex/screens/station-detail-phone-v2.png",
               width: 784,
               height: 1704,
               alt: "Station detail with Charger 1 expanded, showing two slots with their connector and power.",
