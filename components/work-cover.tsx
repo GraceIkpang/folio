@@ -1,0 +1,72 @@
+import Image from "next/image";
+import type { CSSProperties } from "react";
+import type { WorkCover as WorkCoverData } from "@/content/site";
+
+/**
+ * A project cover drawn the same way every time: a quiet tile in the page's
+ * own tones, a soft glow of the product's brand colour, and one device
+ * (a phone or a browser window) centred and rising out of the bottom edge.
+ * Only the screenshot and the glow colour change from project to project.
+ */
+export function WorkCover({ cover }: { cover: WorkCoverData }) {
+  const glow = { "--glow": cover.glow } as CSSProperties;
+
+  return (
+    <div className="absolute inset-0 bg-tile [container-type:inline-size]" style={glow}>
+      {/* Wider for a browser window, so the colour still shows around it. */}
+      <div
+        aria-hidden="true"
+        className={`absolute inset-0 ${
+          cover.kind === "phone"
+            ? "bg-[radial-gradient(55%_45%_at_50%_82%,color-mix(in_srgb,var(--glow)_34%,transparent),transparent_75%)]"
+            : "bg-[radial-gradient(70%_55%_at_50%_85%,color-mix(in_srgb,var(--glow)_40%,transparent),transparent_75%)]"
+        }`}
+      />
+      {cover.kind === "phone" ? <Phone cover={cover} /> : <Browser cover={cover} />}
+    </div>
+  );
+}
+
+const DEVICE_SHADOW =
+  "shadow-[0_0_0_1px_rgb(0_0_0/0.06),0_2cqw_5cqw_-1cqw_rgb(21_21_27/0.22)]";
+
+function Phone({ cover }: { cover: WorkCoverData }) {
+  return (
+    <div
+      className={`showcase-image absolute top-[12%] left-1/2 w-[44%] -translate-x-1/2 rounded-[7.2cqw] bg-[#121214] p-[1.3cqw] ${DEVICE_SHADOW}`}
+    >
+      <Image
+        src={cover.src}
+        alt=""
+        width={cover.width}
+        height={cover.height}
+        sizes="(min-width: 640px) 190px, 40vw"
+        className="h-auto w-full rounded-[6cqw]"
+      />
+    </div>
+  );
+}
+
+function Browser({ cover }: { cover: WorkCoverData }) {
+  return (
+    <div
+      className={`showcase-image absolute top-[12%] left-1/2 w-[84%] -translate-x-1/2 overflow-hidden rounded-[1.8cqw] bg-surface ${DEVICE_SHADOW}`}
+    >
+      {/* A light, minimal window bar, the same on every website cover. */}
+      <div className="relative flex h-[5cqw] items-center gap-[0.9cqw] border-b border-line px-[2cqw]">
+        {[0, 1, 2].map((dot) => (
+          <span key={dot} className="size-[1.2cqw] rounded-full bg-line" />
+        ))}
+        <span className="absolute top-1/2 left-1/2 h-[2.4cqw] w-[34%] -translate-1/2 rounded-full bg-tile" />
+      </div>
+      <Image
+        src={cover.src}
+        alt=""
+        width={cover.width}
+        height={cover.height}
+        sizes="(min-width: 640px) 350px, 72vw"
+        className="h-auto w-full"
+      />
+    </div>
+  );
+}

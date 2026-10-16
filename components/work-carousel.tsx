@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import type { SelectedWork } from "@/content/site";
+import { WorkCover } from "./work-cover";
 
 /**
  * Selected work as a horizontal carousel of big, image-led cards.
@@ -91,19 +92,27 @@ export function WorkCarousel({ items }: { items: SelectedWork[] }) {
 }
 
 function WorkCard({ item }: { item: SelectedWork }) {
-  const { name, tagline, href, image } = item;
+  const { name, tagline, href, image, cover } = item;
 
   return (
     <li className="w-[85%] shrink-0 snap-start sm:w-[calc((100%-1rem)/2)]">
       <article className="showcase-card group relative">
-        <div className="showcase-frame relative aspect-[8/7] overflow-hidden rounded-[14px] border border-line bg-surface">
-          <Image
-            src={image}
-            alt=""
-            fill
-            sizes="(min-width: 640px) 414px, 85vw"
-            className="showcase-image object-cover"
-          />
+        <div
+          className={`showcase-frame relative aspect-[8/7] overflow-hidden rounded-[14px] ${
+            cover ? "" : "border border-line bg-surface"
+          }`}
+        >
+          {cover ? (
+            <WorkCover cover={cover} />
+          ) : (
+            <Image
+              src={image}
+              alt=""
+              fill
+              sizes="(min-width: 640px) 414px, 85vw"
+              className="showcase-image object-cover"
+            />
+          )}
           {href && (
             <span
               aria-hidden="true"

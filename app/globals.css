@@ -8,6 +8,8 @@
   /* Colours */
   --color-canvas: #fafaf7;
   --color-surface: #ffffff;
+  /* Project cover tiles: one quiet step darker than the page. */
+  --color-tile: #f1f0ec;
   --color-line: #e8e6e1;
   --color-ink: #15151b;
   --color-muted: #6c6c74;

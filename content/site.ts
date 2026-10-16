@@ -103,10 +103,23 @@ export const liveProducts: LiveProduct[] = [
 ];
 
 /** A card in the homepage "Selected work" carousel. Images are 8:7 (828 × 724). */
+/** A cover drawn in code (see components/work-cover.tsx) from one screenshot. */
+export type WorkCover = {
+  kind: "phone" | "browser";
+  /** A phone screen (e.g. 786 × 1704) or the top of a web page, without any frame. */
+  src: string;
+  width: number;
+  height: number;
+  /** The product's brand colour, used for the soft glow behind the device. */
+  glow: string;
+};
+
 export type SelectedWork = {
   name: string;
   tagline: string;
   image: string;
+  /** When set, replaces `image` with a cover drawn in the shared style. */
+  cover?: WorkCover;
   /** Link to the project's case study. */
   href?: string;
 };
@@ -116,6 +129,13 @@ export const selectedWork: SelectedWork[] = [
     name: "SureChargeX",
     tagline: "Find stations, book sessions, and charge.",
     image: "/images/carousel/surechargex.png",
+    cover: {
+      kind: "phone",
+      src: "/images/carousel/covers/surechargex-screen.png",
+      width: 786,
+      height: 1704,
+      glow: "#25d366",
+    },
     href: "/work/surechargex",
   },
   {
@@ -128,6 +148,13 @@ export const selectedWork: SelectedWork[] = [
     name: "Algol Solutions",
     tagline: "A digital home for tech consulting.",
     image: "/images/carousel/algol-solutions.png",
+    cover: {
+      kind: "browser",
+      src: "/images/carousel/covers/algol-screen-tall.png",
+      width: 816,
+      height: 780,
+      glow: "#4a6fa5",
+    },
     href: "/work/algol-solutions",
   },
   {
