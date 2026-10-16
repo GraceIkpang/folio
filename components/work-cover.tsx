@@ -7,9 +7,11 @@ import type { WorkCover as WorkCoverData } from "@/content/site";
  * own tones, a soft glow of the product's brand colour, and one device
  * (a phone or a browser window) centred and rising out of the bottom edge.
  * Only the screenshot and the glow colour change from project to project.
+ * Finished artwork can instead sit inset in the same tile ("inset").
  */
 export function WorkCover({ cover }: { cover: WorkCoverData }) {
-  const glow = { "--glow": cover.glow } as CSSProperties;
+  if (cover.kind === "inset") return <Inset cover={cover} />;
+  const glow = { "--glow": cover.glow ?? "transparent" } as CSSProperties;
 
   return (
     <div className="absolute inset-0 bg-tile [container-type:inline-size]" style={glow}>
@@ -67,6 +69,23 @@ function Browser({ cover }: { cover: WorkCoverData }) {
         sizes="(min-width: 640px) 350px, 72vw"
         className="h-auto w-full"
       />
+    </div>
+  );
+}
+
+/** Finished artwork set inside the tile with an even border on every side. */
+function Inset({ cover }: { cover: WorkCoverData }) {
+  return (
+    <div className="absolute inset-0 bg-tile p-[4.5%]">
+      <div className="showcase-image relative h-full w-full overflow-hidden rounded-[8px] shadow-[0_0_0_1px_rgb(0_0_0/0.06)]">
+        <Image
+          src={cover.src}
+          alt=""
+          fill
+          sizes="(min-width: 640px) 380px, 78vw"
+          className="object-cover"
+        />
+      </div>
     </div>
   );
 }

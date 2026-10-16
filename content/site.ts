@@ -103,15 +103,17 @@ export const liveProducts: LiveProduct[] = [
 ];
 
 /** A card in the homepage "Selected work" carousel. Images are 8:7 (828 × 724). */
-/** A cover drawn in code (see components/work-cover.tsx) from one screenshot. */
+/** A cover drawn in code (see components/work-cover.tsx) from one image. */
 export type WorkCover = {
-  kind: "phone" | "browser";
-  /** A phone screen (e.g. 786 × 1704) or the top of a web page, without any frame. */
+  /** "phone" or "browser" frame a bare screenshot; "inset" mounts finished
+      artwork inside the tile with an even border, like a framed print. */
+  kind: "phone" | "browser" | "inset";
+  /** A phone screen (e.g. 786 × 1704), the top of a web page, or the artwork. */
   src: string;
   width: number;
   height: number;
-  /** The product's brand colour, used for the soft glow behind the device. */
-  glow: string;
+  /** The product's brand colour, used for the soft glow behind a device. */
+  glow?: string;
 };
 
 export type SelectedWork = {
@@ -142,6 +144,7 @@ export const selectedWork: SelectedWork[] = [
     name: "KIPA",
     tagline: "Escrow payments and errands, one app.",
     image: "/images/carousel/kipa.png",
+    cover: { kind: "inset", src: "/images/carousel/kipa.png", width: 828, height: 724 },
     href: "/work/kipa",
   },
   {
