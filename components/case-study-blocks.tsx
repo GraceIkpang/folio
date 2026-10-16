@@ -244,9 +244,13 @@ function Block({ block }: { block: CaseStudyBlock }) {
                   {group.title}
                 </p>
               )}
+              {/* Pairs use the same screen width as rows of three, centred,
+                  so phones stay in proportion to the text around them. */}
               <ol
                 className={`grid grid-cols-2 gap-x-4 gap-y-6 ${
-                  group.columns === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2"
+                  group.columns === 3
+                    ? "sm:grid-cols-3"
+                    : "sm:grid-cols-[repeat(2,calc((100%-2rem)/3))] sm:justify-center"
                 }`}
               >
                 {group.screens.map((screen, i) => (
@@ -257,7 +261,7 @@ function Block({ block }: { block: CaseStudyBlock }) {
                         alt={screen.alt}
                         width={screen.width}
                         height={screen.height}
-                        sizes={group.columns === 3 ? "(min-width: 640px) 271px, 45vw" : "(min-width: 640px) 414px, 45vw"}
+                        sizes="(min-width: 640px) 271px, 45vw"
                         className="h-auto w-full"
                       />
                       {screen.highlights?.map((h, k) => (
@@ -269,7 +273,7 @@ function Block({ block }: { block: CaseStudyBlock }) {
                         />
                       ))}
                     </div>
-                    <p className="pt-2.5 text-[12px] leading-[19px]">
+                    <p className="pt-3 text-[14px] leading-[21px]">
                       <span className="font-display font-semibold text-ink">
                         {group.screens.length > 1 && <span className="text-accent">{i + 1} </span>}
                         {screen.label}
