@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { themeScript } from "@/lib/theme";
 
 // Fonts ship with the site (from @fontsource-variable) so they load
 // without calling Google Fonts.
@@ -32,8 +33,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      data-theme="light"
+      // The theme script below may switch data-theme before React loads.
+      suppressHydrationWarning
       className={`${inter.variable} ${spaceGrotesk.variable} ${caveat.variable} antialiased`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="font-sans">{children}</body>
     </html>
   );

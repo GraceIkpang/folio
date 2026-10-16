@@ -119,7 +119,7 @@ export function SureChargeXJourney({ alt }: { alt: string }) {
 
   return (
     <div ref={stageRef} role="img" aria-label={alt} data-state="static" className={styles.stage}>
-      <Image src={`${DIR}/bg.png`} alt="" width={1328} height={747} sizes="(min-width: 900px) 844px, 100vw" className={styles.fill} />
+      <Image src={`${DIR}/bg.png`} alt="" width={1328} height={747} sizes="(min-width: 900px) 844px, 100vw" className={`${styles.fill} ${styles.backdrop}`} />
 
       {/* Left: driving to the station */}
       <div aria-hidden="true" className={`${styles.phone} ${styles.riseLate}`} style={phoneStyle("left")}>

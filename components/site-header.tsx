@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { navigation, profile } from "@/content/site";
 import { LocalClock } from "./local-clock";
+import { ThemeToggle } from "./theme-toggle";
 
 export function SiteHeader() {
   return (
@@ -12,20 +13,23 @@ export function SiteHeader() {
           </Link>
           <p className="pt-1 text-ui text-muted">{profile.tagline}</p>
         </div>
-        <nav aria-label="Main">
-          <ul className="flex gap-[22px]">
-            {navigation.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="text-ui text-muted transition-colors hover:text-ink focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className="flex items-center gap-[22px] sm:-mt-1.5">
+          <nav aria-label="Main">
+            <ul className="flex gap-[22px]">
+              {navigation.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="text-ui text-muted transition-colors hover:text-ink focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <ThemeToggle />
+        </div>
       </div>
       <LocalClock city={profile.city} timeZone={profile.timeZone} />
     </header>

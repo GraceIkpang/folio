@@ -53,6 +53,23 @@
   --text-caption--line-height: 17px;
 }
 
+/*
+ * Dark mode, modelled on creativestefan.work: a near-black page, cards one
+ * quiet step lighter, off-white text and faint white borders. The pink
+ * accent stays. Set on <html data-theme="dark"> before the first paint by
+ * the script in app/layout.tsx, and switched by components/theme-toggle.tsx.
+ */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-canvas: #0a0a0a;
+  --color-surface: #171717;
+  --color-tile: #171717;
+  --color-line: #262626;
+  --color-ink: #fafafa;
+  --color-muted: #9a9a9a;
+  --color-accent-soft: #3a1424;
+}
+
 html {
   background: var(--color-canvas);
 }
@@ -128,5 +145,82 @@ body {
   .showcase-card:hover .showcase-image,
   .showcase-chip {
     transform: none;
+  }
+}
+
+/*
+ * Theme toggle icons. Both icons sit in the button; the <html data-theme>
+ * attribute decides which one shows, so the right icon is there on the very
+ * first paint. The swap is a little playful: the sun spins away as the moon
+ * rolls in with a small overshoot, then its stars twinkle.
+ */
+.theme-sun,
+.theme-moon {
+  transition:
+    opacity 260ms var(--ease-out),
+    rotate 520ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    scale 520ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.theme-moon,
+:root[data-theme="dark"] .theme-sun {
+  opacity: 0;
+  rotate: -90deg;
+  scale: 0.4;
+}
+
+:root[data-theme="dark"] .theme-moon {
+  opacity: 1;
+  rotate: 0deg;
+  scale: 1;
+}
+
+:root[data-theme="dark"] .theme-sun {
+  rotate: 90deg;
+}
+
+.theme-rays,
+.theme-star {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.theme-rays {
+  transition: rotate 600ms var(--ease-out);
+}
+
+@keyframes twinkle {
+  50% {
+    scale: 0.3;
+    opacity: 0.4;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .theme-toggle:hover .theme-rays {
+    rotate: 45deg;
+  }
+
+  :root[data-theme="dark"] .theme-toggle:hover .theme-star {
+    animation: twinkle 700ms ease-in-out 2;
+  }
+
+  :root[data-theme="dark"] .theme-toggle:hover .theme-star-late {
+    animation-delay: 180ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-sun,
+  .theme-moon,
+  :root[data-theme="dark"] .theme-sun {
+    rotate: 0deg;
+    scale: 1;
+  }
+
+  .theme-toggle .theme-rays,
+  .theme-toggle .theme-star {
+    rotate: 0deg;
+    animation: none !important;
   }
 }

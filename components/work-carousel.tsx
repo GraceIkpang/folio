@@ -116,7 +116,7 @@ function WorkCard({ item }: { item: SelectedWork }) {
           {href && (
             <span
               aria-hidden="true"
-              className="showcase-chip absolute top-4 right-4 rounded-full bg-ink/85 px-3 py-1.5 text-[12px] leading-[19px] text-white backdrop-blur-sm"
+              className="showcase-chip absolute top-4 right-4 rounded-full bg-[#15151b]/85 px-3 py-1.5 text-[12px] leading-[19px] text-white backdrop-blur-sm"
             >
               View case study →
             </span>

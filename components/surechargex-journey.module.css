@@ -10,6 +10,20 @@
   overflow: hidden;
 }
 
+/* Dark mode swaps the light card artwork for the same card drawn in the
+   dark palette: tile, hairline border, rounded corners and the green glow. */
+:global(:root[data-theme="dark"]) .stage {
+  border: 1px solid var(--color-line);
+  border-radius: 1.6% / 2.8%;
+  background:
+    radial-gradient(42% 52% at 50% 54%, rgb(37 211 102 / 0.2), transparent 72%),
+    var(--color-tile);
+}
+
+:global(:root[data-theme="dark"]) .backdrop {
+  display: none;
+}
+
 .fill {
   position: absolute;
   inset: 0;
