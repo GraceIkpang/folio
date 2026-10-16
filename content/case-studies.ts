@@ -287,7 +287,7 @@ export const caseStudies: CaseStudy[] = [
               highlights: [{ x: 4, y: 64, w: 92, h: 25 }],
             },
             {
-              src: "/images/case-studies/surechargex/screens/booking-confirmed-v2.png",
+              src: "/images/case-studies/surechargex/screens/booking-confirmed-v3.png",
               width: 786,
               height: 1966,
               alt: "Booking Confirmed overlay over the booking summary, with a View Booking button.",
