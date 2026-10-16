@@ -144,7 +144,7 @@ export const selectedWork: SelectedWork[] = [
     name: "KIPA",
     tagline: "Escrow payments and errands, one app.",
     image: "/images/carousel/kipa.png",
-    cover: { kind: "inset", src: "/images/carousel/kipa.png", width: 828, height: 724 },
+    cover: { kind: "inset", src: "/images/carousel/covers/kipa-calm.png", width: 828, height: 724 },
     href: "/work/kipa",
   },
   {
