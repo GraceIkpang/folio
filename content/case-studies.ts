@@ -275,7 +275,7 @@ export const caseStudies: CaseStudy[] = [
               alt: "Booking screen with a date strip, taken slots, a selected 13:00 to 14:00 slot, and the booking fee and overstay notes.",
               label: "Choose a slot",
               note: "The fee and the overstay rule, up front",
-              highlights: [{ x: 4, y: 15.2, w: 92, h: 5.4 }, { x: 2, y: 43.2, w: 96, h: 6.2 }],
+              highlights: [{ x: 4, y: 15.2, w: 92, h: 5.4 }, { x: 2, y: 42.2, w: 96, h: 7.6 }],
             },
             {
               src: "/images/case-studies/surechargex/screens/booking-summary-v2.png",
