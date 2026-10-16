@@ -235,22 +235,23 @@ function Block({ block }: { block: CaseStudyBlock }) {
 
     case "screens":
       return (
-        <figure className="flex flex-col gap-6">
+        <figure className="flex flex-col gap-10">
           {block.label && <BlockLabel {...block.label} />}
           {block.groups.map((group, g) => (
-            <div key={g}>
+            // Pairs use the same screen width as rows of three, centred with
+            // their title, so phones stay in proportion to the text around them.
+            <div
+              key={g}
+              className={group.columns === 2 ? "sm:mx-auto sm:w-[calc((100%-2rem)*2/3+1rem)]" : undefined}
+            >
               {group.title && (
-                <p className="pb-3 font-display text-meta tracking-[0.78px] text-muted uppercase">
+                <p className="pb-5 font-display text-meta tracking-[0.78px] text-muted uppercase">
                   {group.title}
                 </p>
               )}
-              {/* Pairs use the same screen width as rows of three, centred,
-                  so phones stay in proportion to the text around them. */}
               <ol
-                className={`grid grid-cols-2 gap-x-4 gap-y-6 ${
-                  group.columns === 3
-                    ? "sm:grid-cols-3"
-                    : "sm:grid-cols-[repeat(2,calc((100%-2rem)/3))] sm:justify-center"
+                className={`grid grid-cols-2 gap-x-4 gap-y-12 ${
+                  group.columns === 3 ? "sm:grid-cols-3" : ""
                 }`}
               >
                 {group.screens.map((screen, i) => (
@@ -290,7 +291,7 @@ function Block({ block }: { block: CaseStudyBlock }) {
 
     case "annotated":
       return (
-        <figure className="flex flex-col gap-6">
+        <figure className="flex flex-col gap-10">
           {block.label && <BlockLabel {...block.label} />}
           <div className="grid gap-8 sm:grid-cols-[260px_1fr] sm:items-start">
             <div className="relative mx-auto w-full max-w-[260px] overflow-hidden rounded-[18px] border border-line bg-surface">
