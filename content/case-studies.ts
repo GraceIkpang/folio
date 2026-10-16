@@ -416,6 +416,7 @@ export const caseStudies: CaseStudy[] = [
               height: 1704,
               alt: "Create your 4-digit PIN screen with a number pad.",
               label: "Create PIN",
+              note: "Four digits, set once",
             },
             {
               src: "/images/case-studies/surechargex/screens/pin-wrong.png",
@@ -441,6 +442,7 @@ export const caseStudies: CaseStudy[] = [
               height: 1704,
               alt: "Add Money screen with the current balance, an amount field, quick amounts and top-up methods.",
               label: "Add money",
+              note: "Quick amounts and a clear minimum",
             },
             {
               src: "/images/case-studies/surechargex/screens/wallet-top-up-success.png",
