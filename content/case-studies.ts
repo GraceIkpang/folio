@@ -156,9 +156,9 @@ export const caseStudies: CaseStudy[] = [
     status: "Live",
     website: "https://surecharge.us/",
     hero: {
-      src: "/images/case-studies/surechargex/hero-devices-v2.png",
-      width: 1328,
-      height: 664,
+      src: "/images/case-studies/surechargex/hero-devices-v3.png",
+      width: 2500,
+      height: 1250,
       displayWidth: 844,
       alt: "The SureChargeX website in a browser, with the app’s slot booking screen on a phone beside it.",
       backdrop: { glow: "#25d366" },
