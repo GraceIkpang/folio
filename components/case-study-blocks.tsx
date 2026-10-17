@@ -36,18 +36,34 @@ export function CaseStudyFigure({
     ? { width: `${100 + bleed * 200}%`, marginInline: `-${bleed * 100}%`, maxWidth: "none" }
     : undefined;
 
+  const picture = (
+    <Image
+      src={image.src}
+      alt={image.alt}
+      width={image.width}
+      height={image.height}
+      sizes={sizes ?? `(min-width: 720px) ${image.displayWidth}px, 100vw`}
+      preload={preload}
+      style={bleedStyle}
+      className={`h-auto w-full ${
+        image.backdrop ? "relative drop-shadow-[0_18px_28px_rgb(21_21_27/0.18)]" : ""
+      }`}
+    />
+  );
+
   return (
     <figure>
-      <Image
-        src={image.src}
-        alt={image.alt}
-        width={image.width}
-        height={image.height}
-        sizes={sizes ?? `(min-width: 720px) ${image.displayWidth}px, 100vw`}
-        preload={preload}
-        style={bleedStyle}
-        className="h-auto w-full"
-      />
+      {image.backdrop ? (
+        // The same quiet tile and brand glow as the homepage covers.
+        <div
+          className="overflow-hidden rounded-[14px] bg-tile bg-[radial-gradient(48%_60%_at_50%_88%,color-mix(in_srgb,var(--glow)_30%,transparent),transparent_75%)]"
+          style={{ "--glow": image.backdrop.glow } as CSSProperties}
+        >
+          {picture}
+        </div>
+      ) : (
+        picture
+      )}
       {caption && (
         <figcaption className="flex justify-between gap-4 pt-2.5 text-[12px] leading-[19px] text-muted">
           <span>{caption.start}</span>

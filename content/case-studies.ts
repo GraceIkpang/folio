@@ -13,6 +13,9 @@ type Image = {
   /** The size it should appear on the page, in pixels. */
   displayWidth: number;
   alt: string;
+  /** For cut-out artwork with a transparent background: draws the quiet
+      tile and a soft glow of this brand colour behind it, in both themes. */
+  backdrop?: { glow: string };
 };
 
 /** Small grey text under an image, on the left and (optionally) right. */
@@ -153,11 +156,12 @@ export const caseStudies: CaseStudy[] = [
     status: "Live",
     website: "https://surecharge.us/",
     hero: {
-      src: "/images/case-studies/surechargex/hero-v3.png",
+      src: "/images/case-studies/surechargex/hero-devices-v2.png",
       width: 1328,
       height: 664,
       displayWidth: 844,
-      alt: "The SureChargeX website on a laptop, with the app’s slot booking screen on a phone beside it.",
+      alt: "The SureChargeX website in a browser, with the app’s slot booking screen on a phone beside it.",
+      backdrop: { glow: "#25d366" },
     },
     blocks: [
       {
