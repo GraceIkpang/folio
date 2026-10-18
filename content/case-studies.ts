@@ -807,6 +807,8 @@ export type UpcomingCaseStudy = {
   name: string;
   summary: string;
   platform: string;
+  /** The live product, shown as a "Visit website" button. */
+  website?: string;
 };
 
 export const upcomingCaseStudies: UpcomingCaseStudy[] = [
@@ -815,24 +817,28 @@ export const upcomingCaseStudies: UpcomingCaseStudy[] = [
     name: "AshAudit",
     summary: "GPS-accurate site audits, online or offline.",
     platform: "Web & Mobile",
+    website: "https://ashaudit.com/",
   },
   {
     slug: "ashgridx",
     name: "AshGridX",
     summary: "Track electricity usage and recharge instantly.",
     platform: "Web & Mobile",
+    website: "https://ashgridx.com/",
   },
   {
     slug: "urban-women",
     name: "Urban Women",
     summary: "A nonprofit’s mission brought to life.",
     platform: "Web",
+    website: "https://www.urban-women.com/",
   },
   {
     slug: "ashgridx-workspace",
     name: "AshGridX Workspace",
     summary: "The console behind SureChargeX, AshAudit, and AshGridX.",
     platform: "Web",
+    website: "https://ashgridx.web.app/",
   },
 ];
 

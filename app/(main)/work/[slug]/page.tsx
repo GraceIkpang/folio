@@ -135,6 +135,21 @@ function ComingSoon({ study }: { study: UpcomingCaseStudy }) {
           {study.name}
         </h1>
         <p className="max-w-[505px] pt-3 text-lead text-muted">{study.summary}</p>
+
+        {study.website && (
+          <div className="pt-6">
+            <ButtonLink
+              href={study.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-5"
+            >
+              Visit website
+              <span aria-hidden="true" className="text-hint">↗</span>
+              <span className="sr-only">(opens in a new tab)</span>
+            </ButtonLink>
+          </div>
+        )}
       </header>
 
       <div className="mt-11 flex flex-col items-center gap-2 rounded-[14px] border border-line bg-surface px-6 py-16 text-center">
