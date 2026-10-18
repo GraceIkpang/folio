@@ -94,8 +94,8 @@ export const workPage = {
 
 export const liveProducts: LiveProduct[] = [
   { name: "SureChargeX", summary: "Find stations, book sessions, and charge.", platform: "Web & Mobile", caseStudy: "/work/surechargex" },
-  { name: "Algol Solutions", summary: "A digital home for tech consulting.", platform: "Web", caseStudy: "/work/algol-solutions" },
   { name: "Kipa", summary: "Escrow payments and errands, one app.", platform: "Mobile", caseStudy: "/work/kipa" },
+  { name: "Algol Solutions", summary: "A digital home for tech consulting.", platform: "Web", caseStudy: "/work/algol-solutions" },
   { name: "AshAudit", summary: "GPS-accurate site audits, online or offline.", platform: "Web & Mobile", caseStudy: "/work/ashaudit" },
   { name: "AshGridX", summary: "Track electricity usage and recharge instantly.", platform: "Web & Mobile", caseStudy: "/work/ashgridx" },
   { name: "Urban Women", summary: "A nonprofit’s mission brought to life.", platform: "Web", caseStudy: "/work/urban-women" },
