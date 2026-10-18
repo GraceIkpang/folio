@@ -145,30 +145,37 @@
   font-size: 3.2cqw;
 }
 
-/* ---- Motion: only once the scene is armed (never for reduced motion) ---- */
+/* ---- Motion: only while armed or playing (never for reduced motion) ---- */
 
-.stage:not([data-state="static"]) .rise {
+.stage:is([data-state="armed"], [data-state="play"]) .rise {
   animation: rise 1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
-.stage:not([data-state="static"]) .riseLate {
+.stage:is([data-state="armed"], [data-state="play"]) .riseLate {
   animation: rise 1s 0.19s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
-.stage:not([data-state="static"]) .pulse {
+.stage:is([data-state="armed"], [data-state="play"]) .pulse {
   animation: pulse 0.7s 1s ease-out 2 both;
 }
 
-.stage:not([data-state="static"]) .sheet {
+.stage:is([data-state="armed"], [data-state="play"]) .sheet {
   animation: sheet-up 0.8s 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
-.stage:not([data-state="static"]) .route path {
+.stage:is([data-state="armed"], [data-state="play"]) .route path {
   animation: draw 0.9s 2s ease-in-out both;
 }
 
-.stage:not([data-state="static"]) .eta {
+.stage:is([data-state="armed"], [data-state="play"]) .eta {
   animation: drop-in 0.55s 2.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* Fade: between loops the finished scene fades out (animations are off here,
+   so it rests on the final frame), then "armed" resets it and it replays. */
+.stage[data-state="fade"] .phone {
+  opacity: 0;
+  transition: opacity 450ms ease;
 }
 
 /* Armed: hold every animation on its first frame until the scene is seen. */

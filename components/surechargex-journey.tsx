@@ -19,6 +19,9 @@ const PHONES = {
 // while the time left to full charge counts down to 00:32:54.
 const BATTERY = { from: 23, to: 51, startAt: 3250, duration: 1750 };
 const TIME_LEFT = { from: 51 * 60 + 42, to: 32 * 60 + 54 };
+// The scene takes 5s to play, rests on the finished frame for 4s so it can be
+// read, then fades out briefly before replaying.
+const LOOP = { playFor: 5000, holdFor: 4000, fadeFor: 450 };
 
 type PhoneKey = keyof typeof PHONES;
 
@@ -67,8 +70,8 @@ const PHONE_SIZES = "(min-width: 900px) 445px, 52vw";
 const SCREEN_SIZES = "(min-width: 900px) 180px, 22vw";
 
 /**
- * Three SureChargeX screens that play the journey once when scrolled into
- * view: find a station, drive to it, charge. Without JavaScript, or for
+ * Three SureChargeX screens that play the journey on a loop while in view:
+ * find a station, drive to it, charge. Without JavaScript, or for
  * visitors who ask for reduced motion, it shows the finished scene.
  */
 export function SureChargeXJourney({ alt }: { alt: string }) {
@@ -89,22 +92,41 @@ export function SureChargeXJourney({ alt }: { alt: string }) {
     stage.dataset.state = "armed";
 
     let frame = 0;
-    let timer = 0;
+    const timers: number[] = [];
+    const later = (ms: number, fn: () => void) => timers.push(window.setTimeout(fn, ms));
+    let visible = false;
+    let running = false;
+
+    // One pass: play, hold on the finished scene, fade out, then go again
+    // if the scene is still on screen (otherwise wait until it is).
+    const cycle = () => {
+      running = true;
+      stage.dataset.state = "play";
+      later(BATTERY.startAt, () => {
+        const start = performance.now();
+        const tick = (now: number) => {
+          const t = Math.min(1, (now - start) / BATTERY.duration);
+          setBattery(battery, 1 - (1 - t) ** 3);
+          if (t < 1) frame = requestAnimationFrame(tick);
+        };
+        frame = requestAnimationFrame(tick);
+      });
+      later(LOOP.playFor + LOOP.holdFor, () => {
+        stage.dataset.state = "fade";
+        later(LOOP.fadeFor, () => {
+          setBattery(battery, 0);
+          stage.dataset.state = "armed";
+          running = false;
+          // Two frames so the browser registers the reset before replaying.
+          requestAnimationFrame(() => requestAnimationFrame(() => visible && cycle()));
+        });
+      });
+    };
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting) return;
-        observer.disconnect();
-        stage.dataset.state = "play";
-
-        timer = window.setTimeout(() => {
-          const start = performance.now();
-          const tick = (now: number) => {
-            const t = Math.min(1, (now - start) / BATTERY.duration);
-            setBattery(battery, 1 - (1 - t) ** 3);
-            if (t < 1) frame = requestAnimationFrame(tick);
-          };
-          frame = requestAnimationFrame(tick);
-        }, BATTERY.startAt);
+        visible = entry.isIntersecting;
+        if (visible && !running) cycle();
       },
       { threshold: 0.4 },
     );
@@ -112,7 +134,7 @@ export function SureChargeXJourney({ alt }: { alt: string }) {
 
     return () => {
       observer.disconnect();
-      window.clearTimeout(timer);
+      timers.forEach((t) => window.clearTimeout(t));
       cancelAnimationFrame(frame);
     };
   }, []);
