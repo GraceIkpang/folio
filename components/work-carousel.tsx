@@ -99,12 +99,12 @@ function WorkCard({ item }: { item: SelectedWork }) {
       <article className="showcase-card group relative">
         <div
           className={`showcase-frame relative aspect-[8/7] overflow-hidden rounded-[14px] ${
-            cover ? "" : "border border-line bg-surface"
+            cover || !image ? "" : "border border-line bg-surface"
           }`}
         >
           {cover ? (
             <WorkCover cover={cover} />
-          ) : (
+          ) : image ? (
             <Image
               src={image}
               alt=""
@@ -112,6 +112,9 @@ function WorkCard({ item }: { item: SelectedWork }) {
               sizes="(min-width: 640px) 414px, 85vw"
               className="showcase-image object-cover"
             />
+          ) : (
+            // No cover yet: a blank tile in the same tone as the others.
+            <div className="absolute inset-0 bg-tile" />
           )}
           {href && (
             <span

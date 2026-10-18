@@ -119,7 +119,8 @@ export type WorkCover = {
 export type SelectedWork = {
   name: string;
   tagline: string;
-  image: string;
+  /** Leave out (with no `cover`) to show a blank tile until a cover is ready. */
+  image?: string;
   /** When set, replaces `image` with a cover drawn in the shared style. */
   cover?: WorkCover;
   /** Link to the project's case study. */
@@ -161,10 +162,10 @@ export const selectedWork: SelectedWork[] = [
     href: "/work/algol-solutions",
   },
   {
-    name: "Urban Women",
-    tagline: "A nonprofit’s mission brought to life.",
-    image: "/images/carousel/urban-women.png",
-    href: "/work/urban-women",
+    name: "AshAudit",
+    tagline: "GPS-accurate site audits, online or offline.",
+    // Cover to come: a blank tile for now.
+    href: "/work/ashaudit",
   },
 ];
 
