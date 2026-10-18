@@ -642,7 +642,7 @@ export const caseStudies: CaseStudy[] = [
     status: "Live",
     website: "https://getkipa.com/",
     hero: {
-      src: "/images/case-studies/kipa/hero.png",
+      src: "/images/case-studies/kipa/hero-calm.png",
       width: 1328,
       height: 664,
       displayWidth: 844,
