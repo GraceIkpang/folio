@@ -114,6 +114,8 @@ export type WorkCover = {
   height: number;
   /** The product's brand colour, used for the soft glow behind a device. */
   glow?: string;
+  /** A silent looping clip shown in the device instead; `src` is its poster. */
+  video?: string;
 };
 
 export type SelectedWork = {
@@ -154,9 +156,10 @@ export const selectedWork: SelectedWork[] = [
     image: "/images/carousel/algol-solutions.png",
     cover: {
       kind: "browser",
-      src: "/images/carousel/covers/algol-screen-tall.png",
-      width: 816,
-      height: 780,
+      src: "/videos/algol/cover-loop-poster.jpg",
+      video: "/videos/algol/cover-loop.mp4",
+      width: 1200,
+      height: 1148,
       glow: "#4a6fa5",
     },
     href: "/work/algol-solutions",

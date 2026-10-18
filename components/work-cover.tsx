@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import type { WorkCover as WorkCoverData } from "@/content/site";
+import { LoopingVideo } from "./looping-video";
 
 /**
  * A project cover drawn the same way every time: a quiet tile in the page's
@@ -61,14 +62,25 @@ function Browser({ cover }: { cover: WorkCoverData }) {
         ))}
         <span className="absolute top-1/2 left-1/2 h-[2.4cqw] w-[34%] -translate-1/2 rounded-full bg-tile" />
       </div>
-      <Image
-        src={cover.src}
-        alt=""
-        width={cover.width}
-        height={cover.height}
-        sizes="(min-width: 640px) 350px, 72vw"
-        className="h-auto w-full"
-      />
+      {cover.video ? (
+        // Plays only while the card is on screen; the poster shows otherwise.
+        <LoopingVideo
+          src={cover.video}
+          poster={cover.src}
+          width={cover.width}
+          height={cover.height}
+          className="block h-auto w-full"
+        />
+      ) : (
+        <Image
+          src={cover.src}
+          alt=""
+          width={cover.width}
+          height={cover.height}
+          sizes="(min-width: 640px) 350px, 72vw"
+          className="h-auto w-full"
+        />
+      )}
     </div>
   );
 }
