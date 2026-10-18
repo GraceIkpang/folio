@@ -81,17 +81,19 @@ function Browser({ cover }: { cover: WorkCoverData }) {
 
 /** Finished artwork set inside the tile with an even border on every side. */
 function Inset({ cover }: { cover: WorkCoverData }) {
-  // A clip keeps its own shape: same width as the artwork, centred top to bottom.
+  // A clip starts at the same top and width as inset artwork, then runs off
+  // the bottom edge. It fills that space, so its right side is trimmed; the
+  // left (logo and headline) always stays in view.
   if (cover.video) {
     return (
-      <div className="absolute inset-0 flex items-center bg-tile px-[4.5%]">
-        <div className="showcase-image w-full overflow-hidden rounded-[8px] shadow-[0_0_0_1px_rgb(0_0_0/0.06)]">
+      <div className="absolute inset-0 bg-tile px-[4.5%] pt-[4.5%]">
+        <div className="showcase-image relative h-full w-full overflow-hidden rounded-t-[8px] shadow-[0_0_0_1px_rgb(0_0_0/0.06)]">
           <LoopingVideo
             src={cover.video}
             poster={cover.src}
             width={cover.width}
             height={cover.height}
-            className="block h-auto w-full"
+            className="absolute inset-0 block h-full w-full object-cover object-left-top"
           />
         </div>
       </div>
