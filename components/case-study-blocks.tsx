@@ -134,7 +134,7 @@ function spaceAbove(block: CaseStudyBlock, previous?: CaseStudyBlock) {
   switch (block.type) {
     case "section":
       if (!previous) return "pt-14";
-      if (previous.type === "highlight") return "pt-9";
+      if (previous.type === "highlight") return "pt-12";
       if (previous.type === "section") return "pt-[52px]";
       return "pt-11";
     case "quote":
@@ -183,16 +183,23 @@ function Block({ block }: { block: CaseStudyBlock }) {
 
     case "highlight":
       return (
-        <div className="flex flex-col gap-1 rounded-[14px] border border-line bg-surface px-[26px] py-6 sm:flex-row sm:items-center sm:gap-[18px]">
-          <p
-            className={`shrink-0 font-display text-section font-medium text-accent ${
-              block.wrap ? "leading-6 sm:max-w-20" : "leading-[53px]"
-            }`}
-          >
-            {block.value}
-          </p>
-          <p className="text-[12px] leading-[22px] text-muted">{block.text}</p>
-        </div>
+        <figure className="rounded-[14px] border border-line bg-surface p-6 sm:p-8">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-8">
+            <p className="shrink-0 font-display text-[52px] leading-none font-semibold tracking-[-0.02em] text-accent sm:text-[64px]">
+              {block.value}
+            </p>
+            <div className="sm:border-l sm:border-line sm:pl-8">
+              <p className="text-role text-ink">{block.text}</p>
+              {block.source && <p className="pt-2 text-hint text-muted">{block.source}</p>}
+            </div>
+          </div>
+          {block.percent !== undefined && (
+            // The share as a bar, so "about half" reads at a glance.
+            <div aria-hidden="true" className="mt-6 h-1.5 overflow-hidden rounded-full bg-line">
+              <div className="h-full rounded-full bg-accent" style={{ width: `${block.percent}%` }} />
+            </div>
+          )}
+        </figure>
       );
 
     case "image":

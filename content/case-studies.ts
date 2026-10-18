@@ -69,10 +69,13 @@ export type CaseStudyBlock = (
     }
   | {
       type: "highlight";
+      /** The big number, e.g. "51%". */
       value: string;
       text: string;
-      /** Let the value wrap onto two short lines, e.g. "2 core / services". */
-      wrap?: boolean;
+      /** Where the number comes from, shown small underneath. */
+      source?: string;
+      /** For a percentage, also draws it as a bar. */
+      percent?: number;
     }
   | {
       type: "image";
@@ -667,7 +670,9 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "highlight",
         value: "51%",
-        text: "of consumers in Nigeria reported a financial scam in the past 12 months, most often on social media. Visa Stay Secure study, 2026.",
+        text: "of consumers in Nigeria reported a financial scam in the past 12 months, most often on social media.",
+        source: "Visa Stay Secure study, 2026",
+        percent: 51,
       },
       {
         type: "section",
