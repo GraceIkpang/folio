@@ -154,13 +154,13 @@ export const selectedWork: SelectedWork[] = [
     name: "Algol Solutions",
     tagline: "A digital home for tech consulting.",
     image: "/images/carousel/algol-solutions.png",
-    // The Recordly clip, uncropped, at the same width as KIPA's inner card.
+    // Slow camera moves over the live site, at the same width as KIPA's inner card.
     cover: {
       kind: "inset",
       src: "/videos/algol/cover-loop-poster.jpg",
       video: "/videos/algol/cover-loop.mp4",
       width: 1200,
-      height: 752,
+      height: 1148,
     },
     href: "/work/algol-solutions",
   },

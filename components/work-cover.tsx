@@ -82,8 +82,7 @@ function Browser({ cover }: { cover: WorkCoverData }) {
 /** Finished artwork set inside the tile with an even border on every side. */
 function Inset({ cover }: { cover: WorkCoverData }) {
   // A clip starts at the same top and width as inset artwork, then runs off
-  // the bottom edge. It fills that space, so its right side is trimmed; the
-  // left (logo and headline) always stays in view.
+  // the bottom edge. Clips are made near-square so only the bottom is hidden.
   if (cover.video) {
     return (
       <div className="absolute inset-0 bg-tile px-[4.5%] pt-[4.5%]">
