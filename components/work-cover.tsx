@@ -6,7 +6,8 @@ import { LoopingVideo } from "./looping-video";
 /**
  * A project cover drawn the same way every time: a quiet tile in the page's
  * own tones, a soft glow of the product's brand colour, and one device
- * (a phone or a browser window) centred and rising out of the bottom edge.
+ * (a phone, or a website as a plain rounded screen) centred and rising out
+ * of the bottom edge.
  * Only the screenshot and the glow colour change from project to project.
  * Finished artwork can instead sit inset in the same tile ("inset").
  */
@@ -55,13 +56,6 @@ function Browser({ cover }: { cover: WorkCoverData }) {
     <div
       className={`showcase-image absolute top-[12%] left-1/2 w-[84%] -translate-x-1/2 overflow-hidden rounded-[1.8cqw] bg-surface ${DEVICE_SHADOW}`}
     >
-      {/* A light, minimal window bar, the same on every website cover. */}
-      <div className="relative flex h-[5cqw] items-center gap-[0.9cqw] border-b border-line px-[2cqw]">
-        {[0, 1, 2].map((dot) => (
-          <span key={dot} className="size-[1.2cqw] rounded-full bg-line" />
-        ))}
-        <span className="absolute top-1/2 left-1/2 h-[2.4cqw] w-[34%] -translate-1/2 rounded-full bg-tile" />
-      </div>
       {cover.video ? (
         // Plays only while the card is on screen; the poster shows otherwise.
         <LoopingVideo
