@@ -648,47 +648,43 @@ export const caseStudies: CaseStudy[] = [
     blocks: [
       {
         type: "section",
-        title: "Problem",
-        compact: true,
+        title: "In short",
         paragraphs: [
-          "An online transaction involves more than making a payment. Buyers need confidence that their order will arrive as expected. Sellers need clarity about when they will receive their money. Arranging delivery adds another layer of coordination.",
-          "KIPA brings payment protection and errand services into one product. Its design challenge is to make that relationship understandable: what happens to the money, what happens to the item, and what each person needs to do next.",
-          "For someone booking an everyday errand, the priority is different. They need a direct way to request a rider and follow the task. Both experiences belong in the same app, but they should remain easy to distinguish.",
+          "Buying from strangers on social media in Nigeria often means paying first and hoping the item arrives. KIPA holds the payment in Kipa Protect until the buyer confirms delivery, and adds rider booking for errands and deliveries in the same app.",
+          "I designed the mobile experience around one idea: people should know where their money stands, not have to guess. That meant making every stage of a protected payment explicit, from confirming before paying, to a visible window before funds are released, to a dispute path that freezes the money straight away. KIPA launched in August 2026.",
+        ],
+      },
+      {
+        type: "section",
+        title: "The problem",
+        heading: "Paying first, and hoping it arrives",
+        paragraphs: [
+          "This project started with complaints. Our client had collected social media posts from people across the board who had been scammed by online vendors. The client had been through it too, and so had I: I once lost ₦40,000 trying to buy a pair of jeans online.",
+          "Public data shows how common this is. In Visa’s 2026 Stay Secure study, 51% of consumers in Nigeria said they had experienced a financial scam in the past 12 months, and 57% of them said it happened on social media, the same place 83% had bought products directly.",
+          "The trust problem runs both ways. Buyers need confidence that their order will arrive as described. Sellers need to know when they will be paid. Arranging delivery adds another layer of coordination.",
         ],
       },
       {
         type: "highlight",
-        value: "2 core services",
-        wrap: true,
-        text: "Protected payments and on-demand errands, connected through one mobile experience.",
+        value: "51%",
+        text: "of consumers in Nigeria reported a financial scam in the past 12 months, most often on social media. Visa Stay Secure study, 2026.",
       },
       {
         type: "section",
-        title: "Role",
+        title: "Approach",
+        heading: "Designing for the moments of doubt",
         paragraphs: [
-          "I designed KIPA’s mobile experience, bringing its escrow and errand services into a shared interface.",
-          "The central design consideration was clarity. Payment protection introduces steps that people need to understand before committing money, while errand booking needs to feel straightforward and practical.",
+          "The client was on a short timeline, so we worked from what we already had: the complaints, our own experiences, and a review of existing escrow applications. Escrow wasn’t new in Nigeria, services like Vesicash already offered it, but buying through social media still meant paying a stranger first.",
+          "I approached the experience through two starting points: someone who wants to transact and someone who needs something picked up or delivered. Separating those intentions gave the flows a clearer purpose. For the payment journey, I brainstormed with stakeholders around the moments where doubt builds:",
+          {
+            list: [
+              "What does the buyer need to know before paying?",
+              "What does the seller need to know while waiting?",
+              "What happens when delivery is complete, or when something is wrong?",
+            ],
+          },
+          "We set the escrow rules together, and I designed how each one is shown, explained and confirmed. I worked with the product lead and engineers over 4 months.",
         ],
-      },
-      {
-        type: "section",
-        title: "Design process",
-        spaceAbove: 36,
-        paragraphs: [
-          "I approached the experience through two starting points: someone who wants to transact and someone who needs something picked up or delivered. Separating those intentions gave the flows a clearer purpose.",
-          "For the payment journey, I focused on the moments where uncertainty could build. What does the buyer need to know before paying? What does the seller need to know while waiting? What happens when delivery is complete, or when something is wrong?",
-          "I used those questions to think through the information needed at each stage, the action available to each person, and the confirmation that follows. The aim was to make the process understandable without making every screen carry every rule.",
-        ],
-      },
-      {
-        type: "image",
-        image: {
-          src: "/images/case-studies/kipa/design-process.png",
-          width: 1328,
-          height: 2990,
-          displayWidth: 844,
-          alt: "Three rows of KIPA screens: the buyer’s core screens for paying into protection, the seller’s core screens for creating a payment and tracking it, and the dispute screens for reporting a problem and following it with support.",
-        },
       },
       {
         type: "quote",
@@ -696,35 +692,53 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         type: "section",
-        title: "Solution",
-        paragraphs: [],
-        subsections: [
-          {
-            title: "Make payment protection understandable",
-            paragraphs: [
-              "Kipa Protect holds payment until delivery is confirmed. That makes the distinction between paying and releasing funds central to the experience.",
-              "A clear interface needs to explain what the current payment status means and what must happen before it changes. Reassuring language alone is not enough when someone is deciding whether to commit money.",
-            ],
-          },
-          {
-            title: "Keep the delivery journey visible",
-            paragraphs: [
-              "KIPA supports rider booking for deliveries, pickups, and errands, alongside delivery tracking. These features help connect a request to the activity happening beyond the screen.",
-              "The design story is about maintaining continuity. Once a task has been requested, people still need context about its progress and completion.",
-            ],
-          },
-          {
-            title: "Make room for problems",
-            paragraphs: [
-              "The product also provides dispute support. Confirmation and dispute actions carry different consequences, so their meaning needs to be clear before someone chooses. This is an important part of the case study: the experience should account for a transaction that needs attention as well as one that finishes successfully.",
-            ],
-          },
+        title: "Decision 1",
+        heading: "Confirm before the money moves",
+        paragraphs: [
+          "Scams start with paying first, so the buyer’s screens focus on what happens before money leaves their account. Opening a payment link shows the item, the fee and the total together, the seller’s details with a way to call them, and how long the seller has to dispatch. If the item isn’t sent in time, the buyer is refunded.",
+          "Before paying, the buyer confirms two things: that the item description is what they are ordering, and that the funds will be held in Kipa Protect until they confirm delivery. Reassuring copy alone isn’t enough when someone is deciding whether to commit money, so the rules become part of the action.",
         ],
       },
       {
         type: "image",
-        spaceAbove: 56,
-        extraSpaceBelow: true,
+        image: {
+          src: "/images/case-studies/kipa/screens-buyer.png",
+          width: 1316,
+          height: 950,
+          displayWidth: 844,
+          alt: "The buyer’s screens: pasting a payment link, the transaction status with the item, fee and total, and the payment screen with the seller’s details, the processing time and two confirmations before paying.",
+        },
+      },
+      {
+        type: "section",
+        title: "Decision 2",
+        heading: "One timeline both sides can read",
+        paragraphs: [
+          "Sellers had the opposite worry: when will I be paid? The seller creates a payment link with the rules up front, including that funds are held until delivery is verified and that dispute windows apply after delivery. Then they follow the same transaction timeline as the buyer: link created, payment received with funds in Kipa Protect, rider booked, item picked up.",
+          "Once paid, the seller sees exactly what they will receive and a processing window: a maximum of 3 days to send the package, or the money is refunded to the buyer automatically. Both sides read the same state, so neither has to message the other to find out where things stand.",
+        ],
+      },
+      {
+        type: "image",
+        image: {
+          src: "/images/case-studies/kipa/screens-seller.png",
+          width: 1316,
+          height: 960,
+          displayWidth: 844,
+          alt: "The seller’s screens: creating a payment link with the important rules up front, the link created and ready to share, and the transaction status with the amount received, the 3 day processing window and the shared timeline.",
+        },
+      },
+      {
+        type: "section",
+        title: "Decision 3",
+        heading: "Make releasing and disputing clearly different",
+        paragraphs: [
+          "Confirming delivery and opening a dispute carry very different consequences, so they needed to look and feel different. After delivery, the seller sees a dispute window counting down: the buyer has 1 hour to raise a problem before funds are released automatically. If the buyer releases early, a final check tells them the release is irreversible.",
+          "Opening a dispute does the opposite. It freezes the funds in Kipa Protect straight away and starts an investigation, and the dispute stays visible next to live chat and call support.",
+        ],
+      },
+      {
+        type: "image",
         image: {
           src: "/images/case-studies/kipa/payment-states.png",
           width: 1328,
@@ -734,16 +748,43 @@ export const caseStudies: CaseStudy[] = [
         },
       },
       {
+        type: "image",
+        image: {
+          src: "/images/case-studies/kipa/screens-dispute.png",
+          width: 1316,
+          height: 975,
+          displayWidth: 844,
+          alt: "The dispute screens: opening a dispute with a notice that funds will be frozen, a reason and a description, and the support screen with live chat, calling and the active dispute.",
+        },
+      },
+      {
         type: "section",
-        title: "Lessons",
+        title: "Decision 4",
+        heading: "Keep errands just as visible",
+        paragraphs: [
+          "Errands have a simpler job: request a rider and follow the task. From the home screen, people can request riders for deliveries, pickups and errands. Once a rider is assigned, they see who is coming, when they will arrive and the delivery route, so the request stays connected to what is happening beyond the screen.",
+        ],
+      },
+      {
+        type: "section",
+        title: "The result",
+        heading: "Live since August 2026",
+        paragraphs: [
+          "KIPA launched on the App Store and Google Play in August 2026. It’s early, and the first App Store reviews are short; one user wrote that it “makes buying and selling so easy and comfortable.”",
+          "What I’d measure next: how many transactions end in a dispute, how quickly disputes are resolved, and how long buyers take to release funds after delivery.",
+        ],
+      },
+      {
+        type: "section",
+        title: "What I’d do differently",
         paragraphs: [
           "Trust is built through understandable states and clear consequences. A polished payment screen matters, but the explanation before a commitment and the feedback after it matter just as much.",
-          "For a future iteration, I would test whether buyers and sellers can explain the payment status in their own words. I would also look closely at whether the confirmation and dispute paths are easy to distinguish when a delivery does not go as expected.",
+          "With more time, I would have tested with real buyers and sellers before launch; the short timeline meant we relied on complaints and our own experience. Next, I would check whether people can explain the payment status in their own words, and whether the release and dispute paths are easy to tell apart when a delivery goes wrong.",
         ],
       },
       {
         type: "link",
-        text: "See the website in action.",
+        text: "Try KIPA for yourself.",
         label: "Visit KIPA",
         href: "https://getkipa.com/",
       },
