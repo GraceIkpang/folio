@@ -81,12 +81,12 @@ function Browser({ cover }: { cover: WorkCoverData }) {
 
 /** Finished artwork set inside the tile with an even border on every side. */
 function Inset({ cover }: { cover: WorkCoverData }) {
-  // A clip starts at the same top and width as inset artwork, then runs off
-  // the bottom edge. Clips are made near-square so only the bottom is hidden.
+  // A clip gets the same even border as inset artwork; it fills that frame
+  // from the top, so only a little of its bottom is trimmed.
   if (cover.video) {
     return (
-      <div className="absolute inset-0 bg-tile px-[4.5%] pt-[4.5%]">
-        <div className="showcase-image relative h-full w-full overflow-hidden rounded-t-[8px] shadow-[0_0_0_1px_rgb(0_0_0/0.06)]">
+      <div className="absolute inset-0 bg-tile p-[4.5%]">
+        <div className="showcase-image relative h-full w-full overflow-hidden rounded-[8px] shadow-[0_0_0_1px_rgb(0_0_0/0.06)]">
           <LoopingVideo
             src={cover.video}
             poster={cover.src}
